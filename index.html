@@ -1,5 +1,775 @@
 <html>
-<body>Hello there</body>
-<script>document.body.insertAdjacentHTML('beforeend', '<div>I can haz JavaScript</div>');
-</script>
+<head>
+	<script>
+		function genProfile(name, withEscSensor, vtxTable, pidSettings) {
+			return `
+defaults nosave
+
+
+# version
+# Betaflight / STM32F405 (S405) 4.4.3 Nov 14 2023 / 18:00:32 (738127e7e) MSP API: 1.45
+
+# config: YES
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name SPEEDYBEEF405V3
+manufacturer_id SPBE
+mcu_id 0031002d3033470f38363131
+signature 
+
+# name: ${name}
+
+# resources
+resource MOTOR 5 NONE
+resource SERVO 2 B00
+
+# feature
+feature -TELEMETRY
+feature -AIRMODE
+feature SERVO_TILT
+${withEscSensor? 'feature ESC_SENSOR' : ''}
+
+# serial
+serial 0 2048 115200 57600 0 115200
+serial 1 0 115200 57600 0 115200
+serial 4 0 115200 57600 0 115200
+serial 5 64 115200 57600 0 115200
+
+# servo
+servo 0 1000 2000 1500 100 8
+servo 1 1000 2000 1500 100 9
+
+# aux
+aux 0 0 0 1700 2100 0 0
+aux 1 1 2 1725 2100 0 0
+aux 2 2 2 1300 1700 0 0
+aux 3 28 3 1300 2100 0 0
+
+# rxrange
+rxrange 0 989 2012
+rxrange 1 989 2012
+rxrange 2 989 2012
+rxrange 3 989 2012
+
+# vtxtable
+${vtxTable}
+
+# vtx
+vtx 0 1 0 0 2 1900 2100
+vtx 1 1 0 0 3 1450 1600
+vtx 2 1 0 0 4 950 1050
+
+# rxfail
+rxfail 3 h
+
+${pidSettings}
+
+# save configuration
+`;
+		}
+		
+const vtxDominator = `
+vtxtable bands 5
+vtxtable channels 8
+vtxtable band 1 BOSCAM_A A FACTORY 5865 5845 5825 5805 5785 5765 5745 5725
+vtxtable band 2 BOSCAM_B B FACTORY 5733 5752 5771 5790 5809 5828 5847 5866
+vtxtable band 3 BOSCAM_E E FACTORY 5705 5685 5665    0 5885 5905    0    0
+vtxtable band 4 FATSHARK F FACTORY 5740 5760 5780 5800 5820 5840 5860 5880
+vtxtable band 5 RACEBAND R FACTORY 5658 5695 5732 5769 5806 5843 5880 5917
+vtxtable powerlevels 4
+vtxtable powervalues 0 1 2 3
+vtxtable powerlabels 250 500 1W 2W
+`;
+
+const vtxRaceRanger = `
+vtxtable bands 6
+vtxtable channels 8
+vtxtable band 1 BOSCAM_A A FACTORY 5865 5845 5825 5805 5785 5765 5745 5725
+vtxtable band 2 BOSCAM_B B FACTORY 5733 5752 5771 5790 5809 5828 5847 5866
+vtxtable band 3 BOSCAM_E E FACTORY 5705 5685 5665 5645 5885 5905 5925 5945
+vtxtable band 4 FATSHARK F FACTORY 5740 5760 5780 5800 5820 5840 5860 5880
+vtxtable band 5 LOWRACE  R FACTORY 5362 5399 5436 5510 5547 5843 5584 5621
+vtxtable band 6 BAND_X   X FACTORY 4990 5020 5050 5080 5110 5140 5170 5200
+vtxtable powerlevels 4
+vtxtable powervalues 0 1 2 3
+vtxtable powerlabels 200 400 800 1600
+`;
+
+const vtxMaxSolo = `
+vtxtable bands 6
+vtxtable channels 8
+vtxtable band 1 BAND_A   A CUSTOM  5865 5845 5825 5805 5785 5765 5745 5725
+vtxtable band 2 BAND_B   B CUSTOM  5733 5752 5771 5790 5999 5828 5847 5866
+vtxtable band 3 BAND_E   E CUSTOM  5705 5685 5665 5645 5885 5905 5925 5945
+vtxtable band 4 AIRWAVE  F CUSTOM  5740 5760 5780 5800 5820 5840 5860 5880
+vtxtable band 5 RACEBAND R CUSTOM  5658 5695 5732 5769 5806 5843 5880 5917
+vtxtable band 6 LOWRACE  L CUSTOM  5362 5399 5436 5473 5510 5547 5584 5621
+vtxtable powerlevels 4
+vtxtable powervalues 14 27 30 34
+vtxtable powerlabels 25 500 1 2.5
+`;
+
+const crabonXing880 = `
+# master
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set dyn_notch_count = 2
+set dyn_notch_q = 500
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_dyn_max_hz = 400
+set acc_trim_pitch = 14
+set acc_trim_roll = -7
+set acc_calibration = 65,31,58,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set small_angle = 180
+set simplified_gyro_filter_multiplier = 80
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2395
+set osd_link_quality_pos = 2424
+set osd_rssi_dbm_pos = 407
+set osd_tim_2_pos = 2456
+set osd_flymode_pos = 2074
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 2133
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2444
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2111278
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 4
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set rpm_filter_min_hz = 90
+set craft_name = Gurkit
+
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set dterm_lpf1_dyn_min_hz = 60
+set dterm_lpf1_dyn_max_hz = 120
+set dterm_lpf1_static_hz = 60
+set dterm_lpf2_static_hz = 120
+set p_pitch = 52
+set i_pitch = 102
+set d_pitch = 41
+set f_pitch = 60
+set p_roll = 50
+set i_roll = 102
+set f_roll = 60
+set p_yaw = 51
+set f_yaw = 60
+set d_min_roll = 33
+set d_min_pitch = 41
+set simplified_pids_mode = OFF
+set simplified_dterm_filter_multiplier = 80
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 52
+set i_pitch = 80
+set d_pitch = 35
+set f_pitch = 60
+set p_roll = 50
+set d_roll = 35
+set f_roll = 60
+set f_yaw = 60
+set d_min_pitch = 30
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 1
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+`;
+
+const crabonBH900 = `
+# master
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set dyn_notch_count = 2
+set dyn_notch_q = 500
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_dyn_max_hz = 400
+set acc_trim_pitch = 0
+set acc_trim_roll = 0
+set acc_calibration = -4,-53,36,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set small_angle = 180
+set simplified_gyro_filter_multiplier = 80
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2395
+set osd_link_quality_pos = 2424
+set osd_rssi_dbm_pos = 407
+set osd_tim_2_pos = 2456
+set osd_flymode_pos = 2074
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 2133
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2444
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2111278
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 4
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set rpm_filter_min_hz = 90
+set craft_name = Gurkit
+
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set dterm_lpf1_dyn_min_hz = 60
+set dterm_lpf1_dyn_max_hz = 120
+set dterm_lpf1_static_hz = 60
+set dterm_lpf2_static_hz = 120
+set p_pitch = 52
+set i_pitch = 102
+set d_pitch = 41
+set f_pitch = 60
+set p_roll = 50
+set i_roll = 102
+set f_roll = 60
+set p_yaw = 51
+set f_yaw = 60
+set d_min_roll = 33
+set d_min_pitch = 41
+set simplified_pids_mode = OFF
+set simplified_dterm_filter_multiplier = 80
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 52
+set i_pitch = 55
+set d_pitch = 20
+set f_pitch = 60
+set p_roll = 50
+set i_roll = 55
+set d_roll = 20
+set f_roll = 60
+set f_yaw = 60
+set d_min_roll = 0
+set d_min_pitch = 0
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+`;
+
+
+const fgBat800 = `
+# master
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set dyn_notch_count = 2
+set dyn_notch_q = 500
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_dyn_max_hz = 400
+set acc_trim_pitch = 0
+set acc_trim_roll = 0
+set acc_calibration = -62,-1,10,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_idle_value = 500
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set small_angle = 180
+set simplified_gyro_filter_multiplier = 80
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2395
+set osd_link_quality_pos = 2424
+set osd_rssi_dbm_pos = 407
+set osd_tim_2_pos = 2456
+set osd_flymode_pos = 2074
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 2133
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2442
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2111278
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set debug_mode = GYRO_SCALED
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 4
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set craft_name = La_Bdzhola
+
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set p_pitch = 40
+set i_pitch = 27
+set d_pitch = 25
+set f_pitch = 60
+set p_roll = 40
+set i_roll = 27
+set d_roll = 22
+set f_roll = 60
+set p_yaw = 40
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 18
+set d_min_pitch = 19
+set simplified_pids_mode = OFF
+set simplified_d_gain = 70
+set simplified_pi_gain = 70
+set simplified_feedforward_gain = 70
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 45
+set i_pitch = 19
+set d_pitch = 17
+set f_pitch = 60
+set i_roll = 19
+set d_roll = 17
+set f_roll = 60
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 12
+set d_min_pitch = 12
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+`;
+
+const fgBat900 = `
+# master
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set dyn_notch_count = 2
+set dyn_notch_q = 500
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_dyn_max_hz = 400
+set acc_trim_pitch = 0
+set acc_trim_roll = 0
+set acc_calibration = -62,-1,10,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_idle_value = 500
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set small_angle = 180
+set simplified_gyro_filter_multiplier = 80
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2395
+set osd_link_quality_pos = 2424
+set osd_rssi_dbm_pos = 407
+set osd_tim_2_pos = 2456
+set osd_flymode_pos = 2074
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 2133
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2442
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2111278
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set debug_mode = GYRO_SCALED
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 4
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set craft_name = La_Bdzhola
+
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set p_pitch = 40
+set i_pitch = 25
+set d_pitch = 25
+set f_pitch = 60
+set p_roll = 40
+set i_roll = 25
+set d_roll = 22
+set f_roll = 60
+set p_yaw = 40
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 18
+set d_min_pitch = 19
+set simplified_pids_mode = OFF
+set simplified_d_gain = 70
+set simplified_pi_gain = 70
+set simplified_feedforward_gain = 70
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 25
+set i_pitch = 22
+set d_pitch = 17
+set f_pitch = 60
+set p_roll = 25
+set i_roll = 22
+set d_roll = 17
+set f_roll = 60
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 12
+set d_min_pitch = 12
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+`;
+
+const fgEmax730 = `
+# master
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set dyn_notch_count = 2
+set dyn_notch_q = 500
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_dyn_max_hz = 400
+set acc_trim_pitch = 0
+set acc_trim_roll = 0
+set acc_calibration = -62,-1,10,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_idle_value = 500
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set small_angle = 180
+set simplified_gyro_filter_multiplier = 80
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2395
+set osd_link_quality_pos = 2424
+set osd_rssi_dbm_pos = 407
+set osd_tim_2_pos = 2456
+set osd_flymode_pos = 2074
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 2133
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2442
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2111278
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set debug_mode = GYRO_SCALED
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 4
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set craft_name = La_Bdzhola
+
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set p_pitch = 27
+set i_pitch = 27
+set d_pitch = 25
+set f_pitch = 60
+set p_roll = 28
+set i_roll = 27
+set d_roll = 22
+set f_roll = 60
+set p_yaw = 40
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 18
+set d_min_pitch = 19
+set simplified_pids_mode = OFF
+set simplified_d_gain = 70
+set simplified_pi_gain = 70
+set simplified_feedforward_gain = 70
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 20
+set i_pitch = 17
+set d_pitch = 17
+set f_pitch = 60
+set p_roll = 20
+set i_roll = 17
+set d_roll = 17
+set f_roll = 60
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 12
+set d_min_pitch = 12
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 1
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+`;
+
+		const vtxTables = {
+			raceRanger: vtxRaceRanger,
+			dominator: vtxDominator,
+			maxsolo: vtxMaxSolo
+		};
+		
+		const withEscSensors = {
+			crabonXing880: true,
+			crabonBH900: false,
+			fgBat800: false,
+			fgBat900: true,
+			fgEmax730: true
+		};
+		
+		const pids = {
+			crabonXing880,
+			crabonBH900,
+			fgBat800,
+			fgBat900,
+			fgEmax730
+		};
+
+		const names = {
+			crabonXing880: 'Gurkit',
+			crabonBH900: 'Gurkit',
+			fgBat800: 'La Bdzhola',
+			fgBat900: 'La Bdzhola',
+			fgEmax730: 'La Bdzhola'
+		};
+
+		function runGenProfile() {
+			const pidOpt = document.getElementById('pid').value;
+			const vtxOpt = document.getElementById('vtx').value;
+			
+			const pidOptName = document.getElementById('pid').options[document.getElementById('pid').selectedIndex].text;
+			const vtxOptName = document.getElementById('vtx').options[document.getElementById('vtx').selectedIndex].text;
+			
+			const profileContents = genProfile(names[pidOpt], withEscSensors[pidOpt], vtxTables[vtxOpt], pids[pidOpt]);
+			
+			var a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([profileContents], { type: 'text/plain' }));
+            a.download = (names[pidOpt]+'_sb405v3_btf443_10frame_'+pidOptName+'_'+vtxOptName).replaceAll(',','').replaceAll(' ', '_')+'.txt';
+
+            // Append the anchor to the body (required for Firefox)
+            document.body.appendChild(a);
+            // Programmatically click the anchor to trigger the download
+            a.click();
+            // Remove the anchor from the body
+            document.body.removeChild(a);
+			URL.revokeObjectURL(url);
+		}
+	</script>
+</head>
+<body>
+	<div>
+		Налаштування PID
+		<select id="pid">
+			<option value="crabonXing880">Carbon, Xing 2814 880KV</option>
+			<option value="crabonBH900">Carbon, BrotherHobby AvengerV3 2812 900KV</option>
+			<option value="fgBat800">Fiberglass, Bat 3110 800KV</option>
+			<option value="fgBat900">Fiberglass, Bat 3115 900KV</option>
+			<option value="fgEmax730">Fiberglass, Emax 2814 730KV</option>
+		</select>
+	</div>
+	<div>
+		Відеопередавач
+		<select id="vtx">
+			<option value="dominator">AKK Dominator</option>
+			<option value="raceRanger">AKK Race Ranger</option>
+			<option value="maxsolo">RushFPV Max Solo</option>
+		</select>
+	</div>
+	<button onclick="runGenProfile()">Скачати профіль</button>
+</body>
 </html>
