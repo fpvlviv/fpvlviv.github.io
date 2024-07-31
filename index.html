@@ -1,9 +1,10 @@
 <html>
+
 <head>
 	<script>
 		const withEscSensors = {
-			crabonXing880: true,
-			crabonBH900: false,
+			carbonXing880: true,
+			carbonBH900: false,
 			fgBat800: false,
 			fgBat900: true,
 			fgEmax730: true
@@ -12,96 +13,123 @@
 		const vtxTables = {
 			raceRanger: 'akk race ranger.txt',
 			dominator: 'akk dominator.txt',
-			maxsolo: 'rushfpv max solo.txt'
+			maxsolo: 'rushfpv max solo.txt',
+			tbsUnify: 'tbsUnify2W.txt',
+			AkkUltra25: 'AkkUltra25.txt',
+			AkkUltra200: 'AkkUltra200.txt'
 		};
 
 		const pids = {
-			crabonXing880: 'carbon Xing880.txt',
-			crabonBH900: 'crabon BrotherHobby900.txt',
+			carbonXing880: 'carbon Xing880.txt',
+			carbonBH900: 'carbon BrotherHobby900.txt',
 			fgBat800: 'fiberglass Bat800.txt',
 			fgBat900: 'fiberglass Bat900.txt',
 			fgEmax730: 'fiberglass Emax730.txt'
 		};
 
 		const names = {
-			crabonXing880: 'Gurkit',
-			crabonBH900: 'Gurkit',
+			carbonXing880: 'Gurkit',
+			carbonBH900: 'Gurkit',
 			fgBat800: 'La Bdzhola',
 			fgBat900: 'La Bdzhola',
 			fgEmax730: 'La Bdzhola'
 		};
 
+		const rcmodes = {
+			Kraken: 'Kraken',
+			B41: 'B41'
+		};
+
 		async function runGenProfile() {
 			const pidOpt = document.getElementById('pid').value;
 			const vtxOpt = document.getElementById('vtx').value;
-			
+			const rcmodeOpt = document.getElementById('rcmode').value;
+
 			const pidOptName = document.getElementById('pid').options[document.getElementById('pid').selectedIndex].text;
 			const vtxOptName = document.getElementById('vtx').options[document.getElementById('vtx').selectedIndex].text;
-			
+			const rcmodeOptName = document.getElementById('rcmode').options[document.getElementById('rcmode').selectedIndex].text;
+
 			const profileContents = genProfile(
-				names[pidOpt], 
-				withEscSensors[pidOpt], 
+				names[pidOpt],
+				withEscSensors[pidOpt],
 				await getContent('./data/vtx/' + encodeURIComponent(vtxTables[vtxOpt])),
-				await getContent('./data/pid/' + encodeURIComponent(pids[pidOpt]))
+				await getContent('./data/pid/' + encodeURIComponent(pids[pidOpt])),
+				await getContent('./data/rcmode/' + encodeURIComponent(rcmodes[rcmodeOpt]))
 			);
-			
+
 			var a = document.createElement('a');
-            a.href = URL.createObjectURL(new Blob([profileContents], { type: 'text/plain' }));
-            a.download = (names[pidOpt] + '_sb405v3_btf443_10frame_' + pidOptName + '_' + vtxOptName)
-				.replaceAll(',','')
+			a.href = URL.createObjectURL(new Blob([profileContents], { type: 'text/plain' }));
+			a.download = (names[pidOpt] + '_sb405v3_btf443_10frame_' + pidOptName + '_' + vtxOptName)
+				.replaceAll(',', '')
 				.replaceAll(' ', '_') + '.txt';
 
-            // Append the anchor to the body (required for Firefox)
-            document.body.appendChild(a);
-            // Programmatically click the anchor to trigger the download
-            a.click();
-            // Remove the anchor from the body
-            document.body.removeChild(a);
+			// Append the anchor to the body (required for Firefox)
+			document.body.appendChild(a);
+			// Programmatically click the anchor to trigger the download
+			a.click();
+			// Remove the anchor from the body
+			document.body.removeChild(a);
 			URL.revokeObjectURL(a.href);
 		}
 
-		function genProfile(name, withEscSensor, vtxTable, pidSettings) {
-			return evaluateTemplate(profileTemplate, {name, withEscSensor, vtxTable, pidSettings});
+		function genProfile(name, withEscSensor, vtxTable, pidSettings, rcMode) {
+			return evaluateTemplate(profileTemplate, { name, withEscSensor, vtxTable, pidSettings, rcMode });
 		}
-		
+
 		function evaluateTemplate(template, data) {
-	        for (const [key, value] of Object.entries(data)) {
-	            this[key] = value;
-	        }
-		    return new Function("return `" + template + "`;").call();
+			for (const [key, value] of Object.entries(data)) {
+				this[key] = value;
+			}
+			return new Function("return `" + template + "`;").call();
 		}
-		
+
 		async function getContent(url) {
-	        const response = await fetch(url);
-	        if (!response.ok) {
-	            throw new Error(`Error: ${response.status}`);
-	        }
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`Error: ${response.status}`);
+			}
 			const x = await response.text();
-	        return x;
+			return x;
 		}
-		
+
 		getContent("./data/template.txt").then(result => window.profileTemplate = result);
 	</script>
 </head>
+
 <body>
+	<br>
 	<div>
 		Налаштування PID
 		<select id="pid">
-			<option value="crabonXing880">Carbon, Xing 2814 880KV</option>
-			<option value="crabonBH900">Carbon, BrotherHobby AvengerV3 2812 900KV</option>
+			<option value="carbonXing880">Carbon, Xing 2814 880KV</option>
+			<option value="carbonBH900">Carbon, BrotherHobby AvengerV3 2812 900KV</option>
 			<option value="fgBat800">Fiberglass, Bat 3110 800KV</option>
 			<option value="fgBat900">Fiberglass, Bat 3115 900KV</option>
 			<option value="fgEmax730">Fiberglass, Emax 2814 730KV</option>
 		</select>
 	</div>
+	<br>
 	<div>
 		Відеопередавач
 		<select id="vtx">
 			<option value="dominator">AKK Dominator</option>
 			<option value="raceRanger">AKK Race Ranger</option>
 			<option value="maxsolo">RushFPV Max Solo</option>
+			<option value="tbsUnify">Tbs Unify 2W</option>
+			<option value="AkkUltra25">Akk Ultra All range 25mW</option>
+			<option value="AkkUltra200">Akk Ultra All range 200mW</option>
 		</select>
 	</div>
+	<br>
+	<div>
+		Режим керування
+		<select id="rcmode">
+			<option value="kraken">Kraken</option>
+			<option value="B41">B41</option>
+		</select>
+	</div>
+	<br>
 	<button onclick="runGenProfile()">Скачати профіль</button>
 </body>
+
 </html>
