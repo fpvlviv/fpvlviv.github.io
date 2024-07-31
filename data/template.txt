@@ -17,8 +17,6 @@ manufacturer_id SPBE
 mcu_id 0031002d3033470f38363131
 signature 
 
-# name: ${name}
-
 # resources
 resource MOTOR 5 NONE
 resource SERVO 2 B00
@@ -35,12 +33,6 @@ serial 1 0 115200 57600 0 115200
 serial 4 0 115200 57600 0 115200
 serial 5 64 115200 57600 0 115200
 
-# servo
-${servo}
-
-# aux
-${aux}
-
 # rxrange
 rxrange 0 989 2012
 rxrange 1 989 2012
@@ -50,8 +42,7 @@ rxrange 3 989 2012
 # vtxtable
 ${vtxTable}
 
-# vtx
-${vtxMode}
+${rcMode}
 
 # rxfail
 rxfail 3 h

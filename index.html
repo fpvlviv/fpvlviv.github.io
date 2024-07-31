@@ -27,17 +27,9 @@
 			fgEmax730: 'fiberglass Emax730.txt'
 		};
 
-		const names = {
-			carbonXing880: 'Gurkit',
-			carbonBH900: 'Gurkit',
-			fgBat800: 'La Bdzhola',
-			fgBat900: 'La Bdzhola',
-			fgEmax730: 'La Bdzhola'
-		};
-
 		const rcmodes = {
-			Kraken: 'Kraken',
-			B41: 'B41'
+			kraken: 'Kraken.txt',
+			B41: 'B41.txt'
 		};
 
 		async function runGenProfile() {
@@ -50,7 +42,6 @@
 			const rcmodeOptName = document.getElementById('rcmode').options[document.getElementById('rcmode').selectedIndex].text;
 
 			const profileContents = genProfile(
-				names[pidOpt],
 				withEscSensors[pidOpt],
 				await getContent('./data/vtx/' + encodeURIComponent(vtxTables[vtxOpt])),
 				await getContent('./data/pid/' + encodeURIComponent(pids[pidOpt])),
@@ -59,7 +50,7 @@
 
 			var a = document.createElement('a');
 			a.href = URL.createObjectURL(new Blob([profileContents], { type: 'text/plain' }));
-			a.download = (names[pidOpt] + '_sb405v3_btf443_10frame_' + pidOptName + '_' + vtxOptName)
+			a.download = (rcmodeOptName + '_sb405v3_btf443_10frame_' + pidOptName + '_' + vtxOptName)
 				.replaceAll(',', '')
 				.replaceAll(' ', '_') + '.txt';
 
@@ -72,8 +63,8 @@
 			URL.revokeObjectURL(a.href);
 		}
 
-		function genProfile(name, withEscSensor, vtxTable, pidSettings, rcMode) {
-			return evaluateTemplate(profileTemplate, { name, withEscSensor, vtxTable, pidSettings, rcMode });
+		function genProfile(withEscSensor, vtxTable, pidSettings, rcMode) {
+			return evaluateTemplate(profileTemplate, { withEscSensor, vtxTable, pidSettings, rcMode });
 		}
 
 		function evaluateTemplate(template, data) {
