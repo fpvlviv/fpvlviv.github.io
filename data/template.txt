@@ -25,7 +25,6 @@ resource SERVO 2 B00
 feature -TELEMETRY
 feature -AIRMODE
 feature SERVO_TILT
-${withEscSensor? 'feature ESC_SENSOR' : ''}
 
 # serial
 serial 0 2048 115200 57600 0 115200
@@ -40,13 +39,13 @@ rxrange 2 989 2012
 rxrange 3 989 2012
 
 # vtxtable
-${vtxTable}
+${vtx}
 
-${rcMode}
+${rcmode}
 
 # rxfail
 rxfail 3 h
 
-${pidSettings}
+${pid}
 
 # save configuration

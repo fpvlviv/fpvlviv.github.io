@@ -1,58 +1,45 @@
 <html>
 
 <head>
-	<script>
-		const withEscSensors = {
-			carbonXing880: true,
-			carbonBH900: false,
-			fgBat800: false,
-			fgBat900: true,
-			fgEmax730: true
-		};
-
-		const vtxTables = {
-			raceRanger: 'akk race ranger.txt',
-			dominator: 'akk dominator.txt',
-			maxsolo: 'rushfpv max solo.txt',
-			tbsUnify: 'tbsUnify2W.txt',
-			AkkUltra25: 'AkkUltra25.txt',
-			AkkUltra200: 'AkkUltra200.txt'
-		};
-
-		const pids = {
-			carbonXing880: 'carbon Xing880.txt',
-			carbonBH900: 'carbon BrotherHobby900.txt',
-			fgBat800: 'fiberglass Bat800.txt',
-			fgBat900: 'fiberglass Bat900.txt',
-			fgEmax730: 'fiberglass Emax730.txt'
-		};
-
-		const rcmodes = {
-			kraken: 'Kraken.txt',
-			B41: 'B41.txt'
-		};
+	<script>		
+	    const htmlEscapes = {
+	        '&': '&amp;',
+	        '<': '&lt;',
+	        '>': '&gt;',
+	        '"': '&quot;',
+	        "'": '&#39;'
+	    };
+		function escapeHtml(str) {
+		    return str.replace(/[&<>"']/g, match => htmlEscapes[match]);
+		}
+		
+		function getSelectorSelection(selectorId) {
+			const selector = document.getElementById(selectorId);
+			return { key:selector.value, value:selector.options[selector.selectedIndex].text };
+		}
 
 		async function runGenProfile() {
-			const pidOpt = document.getElementById('pid').value;
-			const vtxOpt = document.getElementById('vtx').value;
-			const rcmodeOpt = document.getElementById('rcmode').value;
-
-			const pidOptName = document.getElementById('pid').options[document.getElementById('pid').selectedIndex].text;
-			const vtxOptName = document.getElementById('vtx').options[document.getElementById('vtx').selectedIndex].text;
-			const rcmodeOptName = document.getElementById('rcmode').options[document.getElementById('rcmode').selectedIndex].text;
-
-			const profileContents = genProfile(
-				withEscSensors[pidOpt],
-				await getContent('./data/vtx/' + encodeURIComponent(vtxTables[vtxOpt])),
-				await getContent('./data/pid/' + encodeURIComponent(pids[pidOpt])),
-				await getContent('./data/rcmode/' + encodeURIComponent(rcmodes[rcmodeOpt]))
-			);
+			const titles = [];
+			const urls = [];
+			
+			dataFolders.forEach(dataFolder => {
+				const selection = getSelectorSelection(dataFolder);
+				titles.push(selection.value);
+				urls.push('./data/' + dataFolder + '/' + selection.key + '.txt');
+			});
+			const values = await getMultipleContents(urls);
+			
+			const templateParams = {};
+			dataFolders.forEach((dataFolder, index) => {
+				templateParams[dataFolder] = values[index];
+			});
+			
+			const profileContents = genProfile(templateParams);
 
 			var a = document.createElement('a');
 			a.href = URL.createObjectURL(new Blob([profileContents], { type: 'text/plain' }));
-			a.download = (rcmodeOptName + '_sb405v3_btf443_10frame_' + pidOptName + '_' + vtxOptName)
-				.replaceAll(',', '')
-				.replaceAll(' ', '_') + '.txt';
+			
+			a.download = titles.join('_').replaceAll(',', '').replaceAll(/[ ]+/g, '_') + '.txt';
 
 			// Append the anchor to the body (required for Firefox)
 			document.body.appendChild(a);
@@ -63,8 +50,8 @@
 			URL.revokeObjectURL(a.href);
 		}
 
-		function genProfile(withEscSensor, vtxTable, pidSettings, rcMode) {
-			return evaluateTemplate(profileTemplate, { withEscSensor, vtxTable, pidSettings, rcMode });
+		function genProfile(params) {
+			return evaluateTemplate(profileTemplate, params);
 		}
 
 		function evaluateTemplate(template, data) {
@@ -82,45 +69,60 @@
 			const x = await response.text();
 			return x;
 		}
+		
+		async function getMultipleContents(urls) {
+		    try {
+		        const contentPromises = urls.map(url => getContent(url + "?nocache="+new Date().getTime()));
+		        const contents = await Promise.all(contentPromises);
+		        return contents;
+		    } catch (error) {
+		        console.error(error);
+		    }
+		}
+		
+		const selectTemplate = '<div><h4>${escapeHtml(title)}</h4><select id="${selectorId}">${options}</select></div>';
+		const optionTemplate = '<option value="${escapeHtml(optValue)}">${escapeHtml(optName)}</option>';
+		
+		function createSelector(id, title, opts) {
+			const optsHtml = Object.keys(opts).map(key => {
+				const value = opts[key];
+				return evaluateTemplate(optionTemplate, {optValue: key, optName: value});
+			}).join('\n');
+			return evaluateTemplate(selectTemplate, {selectorId: id, title, options: optsHtml});
+		}
+		
+		function strToList(str) {
+			return str.trim().split('\n');
+		}
 
-		getContent("./data/template.txt").then(result => window.profileTemplate = result);
+		function strToMap(str) {
+			const result = {};
+			const lines = strToList(str);
+			lines.forEach(line => {
+				const [key, ...valueParts] = line.split('=');
+				const value = valueParts.length > 0 ? valueParts.join('=') : key;
+		        result[key] = value;
+			});
+			return result;
+		}
+
+		getMultipleContents(["./data/template.txt", "./data/_index.txt"]).then(result => {
+			window.profileTemplate = result[0];
+			window.dataFoldersMap = strToMap(result[1]);
+			window.dataFolders = Object.keys(dataFoldersMap);
+			getMultipleContents(dataFolders.map(folderName => "./data/" + folderName + "/_index.txt")).then(indexesResult => {
+				var html = '';
+				for(var i = 0; i < dataFolders.length; i++) {
+					html += createSelector(dataFolders[i], dataFoldersMap[dataFolders[i]], strToMap(indexesResult[i]));
+				}
+				document.body.insertAdjacentHTML('beforeend', html);
+			});
+		});
 	</script>
 </head>
 
 <body>
-	<br>
-	<div>
-		Налаштування PID
-		<select id="pid">
-			<option value="carbonXing880">Carbon, Xing 2814 880KV</option>
-			<option value="carbonBH900">Carbon, BrotherHobby AvengerV3 2812 900KV</option>
-			<option value="fgBat800">Fiberglass, Bat 3110 800KV</option>
-			<option value="fgBat900">Fiberglass, Bat 3115 900KV</option>
-			<option value="fgEmax730">Fiberglass, Emax 2814 730KV</option>
-		</select>
-	</div>
-	<br>
-	<div>
-		Відеопередавач
-		<select id="vtx">
-			<option value="dominator">AKK Dominator</option>
-			<option value="raceRanger">AKK Race Ranger</option>
-			<option value="maxsolo">RushFPV Max Solo</option>
-			<option value="tbsUnify">Tbs Unify 2W</option>
-			<option value="AkkUltra25">Akk Ultra All range 25mW</option>
-			<option value="AkkUltra200">Akk Ultra All range 200mW</option>
-		</select>
-	</div>
-	<br>
-	<div>
-		Режим керування
-		<select id="rcmode">
-			<option value="kraken">Kraken</option>
-			<option value="B41">B41</option>
-		</select>
-	</div>
-	<br>
-	<button onclick="runGenProfile()">Скачати профіль</button>
+	<div><button onclick="runGenProfile()" style="font-size: 120%">Скачати профіль</button></div>
 </body>
 
 </html>
