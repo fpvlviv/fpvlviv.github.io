@@ -1,0 +1,5 @@
+carbon Xing880=Carbon, Xing 2814 880KV
+carbon BrotherHobby900=Carbon, BrotherHobby AvengerV3 2812 900KV
+fiberglass Bat800=Fiberglass, Bat 3110 800KV
+fiberglass Bat900=Fiberglass, Bat 3115 900KV
+fiberglass Emax730=Fiberglass, Emax 2814 730KV

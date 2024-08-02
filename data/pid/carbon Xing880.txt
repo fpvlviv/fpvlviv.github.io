@@ -1,3 +1,5 @@
+feature ESC_SENSOR
+
 # master
 set gyro_lpf1_static_hz = 200
 set gyro_lpf2_static_hz = 400

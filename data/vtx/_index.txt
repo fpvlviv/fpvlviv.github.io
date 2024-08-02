@@ -1,0 +1,6 @@
+akk race ranger=AKK Race Ranger
+akk dominator=AKK Dominator
+rushfpv max solo=RushFPV Max Solo
+tbsUnify2W=TBS Unify 2W
+AkkUltra25=AKK Ultra 25mW
+AkkUltra200=AKK Ultra 200mW
