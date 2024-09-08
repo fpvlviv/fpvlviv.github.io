@@ -1,6 +1,12 @@
-akk race ranger=AKK Race Ranger
-akk dominator=AKK Dominator
+rushfpv max solo 3PL=RushFPV Max Solo (3 power levels)
+AkkUltra25AllChannels3PL=AKK Ultra-long range 25mW All Channels (3 power levels)
+AkkUltra25_3PL=AKK Ultra-long range 25mW (3 power levels)
+akk dominator 3PL=AKK Dominator (3 power levels)
+tbsUnify2W_3PL=TBS Unify 2W (3 power levels)
+ultra2500_3PL=noname Ultra 2500 (3 power levels)
 rushfpv max solo=RushFPV Max Solo
+AkkUltra25=AKK Ultra-long range 25mW
+AkkUltra200=AKK Ultra-long range 200mW
+akk dominator=AKK Dominator
+akk race ranger=AKK Race Ranger
 tbsUnify2W=TBS Unify 2W
-AkkUltra25=AKK Ultra 25mW
-AkkUltra200=AKK Ultra 200mW
