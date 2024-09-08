@@ -1,5 +1,10 @@
-carbon Xing880=Carbon, Xing 2814 880KV
-carbon BrotherHobby900=Carbon, BrotherHobby AvengerV3 2812 900KV
-fiberglass Bat800=Fiberglass, Bat 3110 800KV
-fiberglass Bat900=Fiberglass, Bat 3115 900KV
-fiberglass Emax730=Fiberglass, Emax 2814 730KV
+carbon_10frame_R3115_900_Hq_9_10=Carbon 10", R 3115 900KV, HQ9-10
+carbon_10frame_BATs3115_900_Hq_9_10=Carbon 10", Bat 3115 900KV, HQ9-10
+carbon_10_X_frame_bat3115_900_Hq_9=Carbon 10" X-frame, Bat 3115 900KV, HQ9
+carbon_10frame_hp3115_640_Hq10=Carbon 10", HobbyPotter 3115 640KV, HQ10
+carbon_10frame_Xing2814_880_Hq9_10=Carbon 10", Xing 2814 880KV, HQ9-10
+carbon Xing880=Carbon 10", Xing 2814 880KV (old profile)
+carbon BrotherHobby900=Carbon 10", BrotherHobby AvengerV3 2812 900KV
+fiberglass Bat800=Fiberglass 10", Bat 3110 800KV
+fiberglass Bat900=Fiberglass 10", Bat 3115 900KV
+fiberglass Emax730=Fiberglass 10", Emax 2814 730KV
