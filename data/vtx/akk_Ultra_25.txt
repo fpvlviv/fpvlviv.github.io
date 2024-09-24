@@ -1,4 +1,4 @@
-# AKK Ultra 25mW
+# AKK Ultra 25mW (profile version 3 power levels)
 
 vtxtable bands 5
 vtxtable channels 8

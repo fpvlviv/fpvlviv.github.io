@@ -1,4 +1,4 @@
-# AKK Ultra 25mW
+# AKK Ultra 25mW pit mode full vtx table
 
 vtxtable bands 5
 vtxtable channels 8

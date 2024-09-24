@@ -1,4 +1,4 @@
-# RushFPV Max Solo (3 power levels)
+# RushFPV Max Solo (profile version 3 power levels)
 
 vtxtable bands 6
 vtxtable channels 8

@@ -1,4 +1,4 @@
-# AKK Ultra 25mW All Channels (3 power levels)
+# AKK Ultra 25mW All Channels full vtx table
 
 # vtxtable
 vtxtable bands 6
