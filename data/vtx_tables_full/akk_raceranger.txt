@@ -1,4 +1,4 @@
-# AKK Race Ranger
+# AKK Race Ranger low band full vtx table
 
 vtxtable bands 6
 vtxtable channels 8

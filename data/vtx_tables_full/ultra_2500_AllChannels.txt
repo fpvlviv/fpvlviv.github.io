@@ -1,4 +1,4 @@
-# noname Ultra 2500 (3 power levels)
+# noname Ultra 2500 full vtx table - power needs to be checked
 
 # vtxtable
 vtxtable bands 7

@@ -1,4 +1,4 @@
-# AKK Ultra 250mW
+# AKK Ultra 250mW first version full vtx table
 
 vtxtable bands 5
 vtxtable channels 8

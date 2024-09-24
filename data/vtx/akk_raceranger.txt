@@ -1,4 +1,4 @@
-# AKK Race Ranger
+# AKK Race Ranger (profile version 3 power levels)
 
 vtxtable bands 6
 vtxtable channels 8

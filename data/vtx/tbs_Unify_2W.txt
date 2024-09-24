@@ -1,4 +1,4 @@
-# TBS Unify clone 2W (3 power levels)
+# TBS Unify clone 2W (profile version 3 power levels)
 
 vtxtable bands 6
 vtxtable channels 8
