@@ -1,0 +1,56 @@
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set p_pitch = 40
+set i_pitch = 27
+set d_pitch = 25
+set f_pitch = 60
+set p_roll = 40
+set i_roll = 27
+set d_roll = 22
+set f_roll = 60
+set p_yaw = 40
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 18
+set d_min_pitch = 19
+set simplified_pids_mode = OFF
+set simplified_d_gain = 70
+set simplified_pi_gain = 70
+set simplified_feedforward_gain = 70
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 45
+set i_pitch = 19
+set d_pitch = 17
+set f_pitch = 60
+set i_roll = 19
+set d_roll = 17
+set f_roll = 60
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 12
+set d_min_pitch = 12
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 1
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0

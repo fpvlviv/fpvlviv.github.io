@@ -2,9 +2,8 @@ defaults nosave
 
 
 # version
-# Betaflight / STM32F405 (S405) 4.4.3 Nov 14 2023 / 18:00:32 (738127e7e) MSP API: 1.45
-
-# config: YES
+# Betaflight / STM32F405 (S405) 4.5.1 Jul 28 2024 / 12:19:21 (77d01ba3b) MSP API: 1.46
+# config rev: 6440ad8
 
 # start the command batch
 batch start
@@ -14,7 +13,7 @@ defaults nosave
 
 board_name SPEEDYBEEF405V3
 manufacturer_id SPBE
-mcu_id 0031002d3033470f38363131
+mcu_id 002e003c3433510d32373636
 signature 
 
 # resources
@@ -22,15 +21,26 @@ resource MOTOR 5 NONE
 resource SERVO 2 B00
 
 # feature
-feature -TELEMETRY
 feature -AIRMODE
+feature -TELEMETRY
 feature SERVO_TILT
+feature OSD
 
 # serial
 serial 0 2048 115200 57600 0 115200
 serial 1 0 115200 57600 0 115200
 serial 4 0 115200 57600 0 115200
 serial 5 64 115200 57600 0 115200
+
+# servo
+servo 0 1000 2000 1500 100 8
+servo 1 1000 1600 1200 100 9
+
+# aux
+aux 0 0 0 1700 2100 0 0
+aux 1 1 2 1725 2100 0 0
+aux 2 2 2 1300 1700 0 0
+aux 3 28 3 1300 2100 0 0
 
 # rxrange
 rxrange 0 989 2012
@@ -41,10 +51,17 @@ rxrange 3 989 2012
 # vtxtable
 ${vtx}
 
-${rcmode}
+# vtx
+vtx 0 1 0 0 1 1900 2100
+vtx 1 1 0 0 2 1450 1600
+vtx 2 1 0 0 3 950 1050
 
 # rxfail
 rxfail 3 h
+rxfail 8 s 2000
+rxfail 9 s 1000
+
+${rcmode}
 
 ${pid}
 

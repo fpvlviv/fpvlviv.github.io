@@ -1,53 +1,45 @@
 <html>
 
 <head>
-	<style>
-		body {
-			background-color: white
-		}
-		
-		html {
-			filter: invert(1) hue-rotate(180deg);
-		}
-	</style>
+	<link rel="stylesheet" href="styles.css">
 	<script>
-	    const htmlEscapes = {
-	        '&': '&amp;',
-	        '<': '&lt;',
-	        '>': '&gt;',
-	        '"': '&quot;',
-	        "'": '&#39;'
-	    };
+		const htmlEscapes = {
+			'&': '&amp;',
+			'<': '&lt;',
+			'>': '&gt;',
+			'"': '&quot;',
+			"'": '&#39;'
+		};
 		function escapeHtml(str) {
-		    return str.replace(/[&<>"']/g, match => htmlEscapes[match]);
+			return str.replace(/[&<>"']/g, match => htmlEscapes[match]);
 		}
-		
+
 		function getSelectorSelection(selectorId) {
 			const selector = document.getElementById(selectorId);
-			return { key:selector.value, value:selector.options[selector.selectedIndex].text };
+			return { key: selector.value, value: selector.options[selector.selectedIndex].text };
 		}
 
 		async function runGenProfile() {
 			const titles = [];
 			const urls = [];
-			
+
 			dataFolders.forEach(dataFolder => {
 				const selection = getSelectorSelection(dataFolder);
 				titles.push(selection.value);
 				urls.push('./data/' + dataFolder + '/' + selection.key + '.txt');
 			});
 			const values = await getMultipleContents(urls);
-			
+
 			const templateParams = {};
 			dataFolders.forEach((dataFolder, index) => {
 				templateParams[dataFolder] = values[index];
 			});
-			
+
 			const profileContents = genProfile(templateParams);
 
 			var a = document.createElement('a');
 			a.href = URL.createObjectURL(new Blob([profileContents], { type: 'text/plain' }));
-			
+
 			a.download = titles.join('_').replaceAll(',', '').replaceAll(/[ ]+/g, '_') + '.txt';
 
 			// Append the anchor to the body (required for Firefox)
@@ -78,28 +70,28 @@
 			const x = await response.text();
 			return x;
 		}
-		
+
 		async function getMultipleContents(urls) {
-		    try {
-		        const contentPromises = urls.map(url => getContent(url + "?nocache="+new Date().getTime()));
-		        const contents = await Promise.all(contentPromises);
-		        return contents;
-		    } catch (error) {
-		        console.error(error);
-		    }
+			try {
+				const contentPromises = urls.map(url => getContent(url + "?nocache=" + new Date().getTime()));
+				const contents = await Promise.all(contentPromises);
+				return contents;
+			} catch (error) {
+				console.error(error);
+			}
 		}
-		
+
 		const selectTemplate = '<div><h4>${escapeHtml(title)}</h4><select id="${selectorId}">${options}</select></div>';
 		const optionTemplate = '<option value="${escapeHtml(optValue)}">${escapeHtml(optName)}</option>';
-		
+
 		function createSelector(id, title, opts) {
 			const optsHtml = Object.keys(opts).map(key => {
 				const value = opts[key];
-				return evaluateTemplate(optionTemplate, {optValue: key, optName: value});
+				return evaluateTemplate(optionTemplate, { optValue: key, optName: value });
 			}).join('\n');
-			return evaluateTemplate(selectTemplate, {selectorId: id, title, options: optsHtml});
+			return evaluateTemplate(selectTemplate, { selectorId: id, title, options: optsHtml });
 		}
-		
+
 		function strToList(str) {
 			return str.trim().split('\n');
 		}
@@ -110,7 +102,7 @@
 			lines.forEach(line => {
 				const [key, ...valueParts] = line.split('=');
 				const value = valueParts.length > 0 ? valueParts.join('=') : key;
-		        result[key] = value;
+				result[key] = value;
 			});
 			return result;
 		}
@@ -120,18 +112,62 @@
 			window.dataFoldersMap = strToMap(result[1]);
 			window.dataFolders = Object.keys(dataFoldersMap);
 			getMultipleContents(dataFolders.map(folderName => "./data/" + folderName + "/_index.txt")).then(indexesResult => {
-				var html = '';
-				for(var i = 0; i < dataFolders.length; i++) {
+				var html = '<div class="center">';
+				for (var i = 0; i < dataFolders.length; i++) {
 					html += createSelector(dataFolders[i], dataFoldersMap[dataFolders[i]], strToMap(indexesResult[i]));
 				}
-				document.body.insertAdjacentHTML('beforeend', html);
+				html += '</div>'
+				document.getElementById('block').insertAdjacentHTML('beforeend', html);
 			});
 		});
+
+		async function getFullVTXProfile() {
+			const selection = getSelectorSelection('vtx');
+			fetch('./data/vtx_tables_full/' + selection.key + '.txt')
+				.then(response => response.blob())
+				.then(blob => {
+					const objectURL = URL.createObjectURL(blob);
+					// Fetch the text content from the blob and display it
+					blob.text().then(text => {
+						const vtxTextArea = document.getElementById('vtxTableText');
+						vtxTextArea.value = text;
+						vtxTextArea.style.display = "block";
+					});
+
+				})
+				.catch(error => console.error('Error fetching file:', error));
+		}
+
 	</script>
 </head>
 
 <body>
-	<div><button onclick="runGenProfile()" style="font-size: 120%">Скачати профіль</button></div>
+	<div class="container_background">
+		<div style="height: 110;">
+			<br>
+		</div>
+
+		<div class="container" id="block">
+			<h1>Генерація FPV профайла</h1>
+		</div>
+		<div class="center">
+			<div style="height: 100">
+				<br>
+			</div>
+			<div class="hor-group">
+				<button onclick="runGenProfile()" class="button">Скачати профіль</button>
+				<button onclick="getFullVTXProfile()" class="button">Повна VTX таблиця</button>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+	  <textarea id="vtxTableText" class="hidden_textarea"></textarea>
+    </div>
+	<h4>
+		<a href="#" id="theme-toggle" data-i18n="theme_toggle">Switch theme</a>
+	</h4>
+
+	<script src="theme.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-# TBS Unify clone 2W
+# TBS Unify clone 2W (3 power levels)
 
 vtxtable bands 6
 vtxtable channels 8
@@ -8,6 +8,6 @@ vtxtable band 3 AIRWAVE  F CUSTOM  5740 5760 5780 5800 5820 5840 5860 5880
 vtxtable band 4 RACEBAND R CUSTOM  5658 5695 5732 5769 5806 5843 5880 5917
 vtxtable band 5 LOWRACE  L CUSTOM  5362 5399 5436 5473 5510 5547 5584 5621
 vtxtable band 6 BAND_X   X CUSTOM  4990 5020 5050 5080 5110 5140 1570 5200
-vtxtable powerlevels 5
-vtxtable powervalues 14 20 26 30 36
-vtxtable powerlabels 25 100 400 1W 2W
+vtxtable powerlevels 3
+vtxtable powervalues 14 20 36
+vtxtable powerlabels 25 100 2W
