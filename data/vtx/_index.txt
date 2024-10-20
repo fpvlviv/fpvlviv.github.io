@@ -6,3 +6,4 @@ akk_Ultra_250=AKK Ultra long range 250mW min
 rushfpv_maxsolo=RushFPV Max Solo
 tbs_Unify_2W=TBS UNIFY PRO32 2W (4.9 Ghz)
 ultra_2500_AllChannels=Ultra2500 2.5W VTX (4.9 Ghz)
+Foxeer_Reaper_Extreme_3W_72Ch=Foxeer Reaper Extreme 3W 72Ch
