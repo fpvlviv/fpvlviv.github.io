@@ -1,3 +1,5 @@
+serial 0 2048 115200 57600 0 115200
+
 # RushFPV Max Solo (profile version 3 power levels)
 
 vtxtable bands 6

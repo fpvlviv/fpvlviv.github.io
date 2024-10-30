@@ -1,3 +1,5 @@
+serial 0 2048 115200 57600 0 115200
+
 # AKK Dominator 40ch no pit mode (profile version 3 power levels)
 
 vtxtable bands 5

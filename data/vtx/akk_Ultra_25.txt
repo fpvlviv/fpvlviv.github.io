@@ -1,3 +1,5 @@
+serial 0 2048 115200 57600 0 115200
+
 # AKK Ultra 25mW (profile version 3 power levels)
 
 vtxtable bands 5

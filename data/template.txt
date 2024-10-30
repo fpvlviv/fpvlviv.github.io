@@ -11,23 +11,13 @@ batch start
 # reset configuration to default settings
 defaults nosave
 
-board_name SPEEDYBEEF405V3
-manufacturer_id SPBE
-mcu_id 002e003c3433510d32373636
-signature 
-
-# resources
-resource MOTOR 5 NONE
-resource SERVO 2 B00
-
 # feature
 feature -AIRMODE
 feature -TELEMETRY
 feature SERVO_TILT
 feature OSD
 
-# serial
-serial 0 2048 115200 57600 0 115200
+# serial - 0 serial is responsed for VTX protocol
 serial 1 0 115200 57600 0 115200
 serial 4 0 115200 57600 0 115200
 serial 5 64 115200 57600 0 115200
