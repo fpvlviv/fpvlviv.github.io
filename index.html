@@ -1,173 +1,279 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      const htmlEscapes = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      };
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, (match) => htmlEscapes[match]);
+      }
 
-<head>
-	<link rel="stylesheet" href="styles.css">
-	<script>
-		const htmlEscapes = {
-			'&': '&amp;',
-			'<': '&lt;',
-			'>': '&gt;',
-			'"': '&quot;',
-			"'": '&#39;'
-		};
-		function escapeHtml(str) {
-			return str.replace(/[&<>"']/g, match => htmlEscapes[match]);
-		}
+      function getSelectorSelection(selectorId) {
+        const selector = document.getElementById(selectorId);
+        return {
+          key: selector.value,
+          value: selector.options[selector.selectedIndex].text,
+        };
+      }
 
-		function getSelectorSelection(selectorId) {
-			const selector = document.getElementById(selectorId);
-			return { key: selector.value, value: selector.options[selector.selectedIndex].text };
-		}
+      function assignSelectorSelection(selectorId, titles, urls) {
+        const selection = getSelectorSelection(selectorId);
+        urls.push("./data/" + selectorId + "/" + selection.value + ".txt");
+      }
 
-		async function runGenProfile() {
-			const titles = [];
-			const urls = [];
+      async function runGenProfile() {
+        const urls = [];
+        const frameCd = document.getElementById("frame").value;
+        const motorCd = document.getElementById("motor").value;
+        const vtxCd = document.getElementById("vtx").value;
+        const rcmodeCd = document.getElementById("rcmode").value;
+        const fcCd = document.getElementById("fc").value;
 
-			dataFolders.forEach(dataFolder => {
-				const selection = getSelectorSelection(dataFolder);
-				titles.push(selection.value);
-				urls.push('./data/' + dataFolder + '/' + selection.key + '.txt');
-			});
-			const values = await getMultipleContents(urls);
+        urls.push("./data/fc/" + fcCd + ".txt");
+        urls.push("./data/vtx/" + vtxCd + ".txt");
+        urls.push("./data/rcmode/" + rcmodeCd + ".txt");
+        urls.push(
+          "./data/pid/" + fcCd + "_" + frameCd + "_" + motorCd + ".txt"
+        );
 
-			const templateParams = {};
-			dataFolders.forEach((dataFolder, index) => {
-				templateParams[dataFolder] = values[index];
-			});
+        const values = await getMultipleContents(urls);
 
-			const profileContents = genProfile(templateParams);
+        const templateParams = {};
 
-			var a = document.createElement('a');
-			a.href = URL.createObjectURL(new Blob([profileContents], { type: 'text/plain' }));
+        templateParams["fc"] = values[0];
+        templateParams["vtx"] = values[1];
+        templateParams["rcmode"] = values[2];
+        templateParams["pid"] = values[3];
 
-			a.download = titles.join('_').replaceAll(',', '').replaceAll(/[ ]+/g, '_') + '.txt';
+        //templateParams[dataFolder] = values[index];
 
-			// Append the anchor to the body (required for Firefox)
-			document.body.appendChild(a);
-			// Programmatically click the anchor to trigger the download
-			a.click();
-			// Remove the anchor from the body
-			document.body.removeChild(a);
-			URL.revokeObjectURL(a.href);
-		}
+        const profileContents = genProfile(templateParams);
 
-		function genProfile(params) {
-			return evaluateTemplate(profileTemplate, params);
-		}
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(
+          new Blob([profileContents], { type: "text/plain" })
+        );
 
-		function evaluateTemplate(template, data) {
-			for (const [key, value] of Object.entries(data)) {
-				this[key] = value;
-			}
-			return new Function("return `" + template + "`;").call();
-		}
+        a.download = title =
+          fcCd +
+          "_" +
+          frameCd +
+          "_" +
+          motorCd +
+          "_" +
+          vtxCd +
+          "_" +
+          rcmodeCd +
+          ".txt";
 
-		async function getContent(url) {
-			const response = await fetch(url);
-			if (!response.ok) {
-				throw new Error(`Error: ${response.status}`);
-			}
-			const x = await response.text();
-			return x;
-		}
+        // Append the anchor to the body (required for Firefox)
+        document.body.appendChild(a);
+        // Programmatically click the anchor to trigger the download
+        a.click();
+        // Remove the anchor from the body
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+      }
 
-		async function getMultipleContents(urls) {
-			try {
-				const contentPromises = urls.map(url => getContent(url + "?nocache=" + new Date().getTime()));
-				const contents = await Promise.all(contentPromises);
-				return contents;
-			} catch (error) {
-				console.error(error);
-			}
-		}
+      function genProfile(params) {
+        return evaluateTemplate(profileTemplate, params);
+      }
 
-		const selectTemplate = '<div><h4>${escapeHtml(title)}</h4><select id="${selectorId}">${options}</select></div>';
-		const optionTemplate = '<option value="${escapeHtml(optValue)}">${escapeHtml(optName)}</option>';
+      function evaluateTemplate(template, data) {
+        for (const [key, value] of Object.entries(data)) {
+          this[key] = value;
+        }
+        return new Function("return `" + template + "`;").call();
+      }
 
-		function createSelector(id, title, opts) {
-			const optsHtml = Object.keys(opts).map(key => {
-				const value = opts[key];
-				return evaluateTemplate(optionTemplate, { optValue: key, optName: value });
-			}).join('\n');
-			return evaluateTemplate(selectTemplate, { selectorId: id, title, options: optsHtml });
-		}
+      async function fileExists(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+          return false;
+        }
+        const x = response.ok;
+        return x;
+      }
 
-		function strToList(str) {
-			return str.trim().split('\n');
-		}
+      async function getContent(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const x = await response.text();
+        return x;
+      }
 
-		function strToMap(str) {
-			const result = {};
-			const lines = strToList(str);
-			lines.forEach(line => {
-				const [key, ...valueParts] = line.split('=');
-				const value = valueParts.length > 0 ? valueParts.join('=') : key;
-				result[key] = value;
-			});
-			return result;
-		}
+      async function getMultipleContents(urls) {
+        try {
+          const contentPromises = urls.map((url) =>
+            getContent(url + "?nocache=" + new Date().getTime())
+          );
+          const contents = await Promise.all(contentPromises);
+          return contents;
+        } catch (error) {
+          console.error(error);
+        }
+      }
 
-		getMultipleContents(["./data/template.txt", "./data/_index.txt"]).then(result => {
-			window.profileTemplate = result[0];
-			window.dataFoldersMap = strToMap(result[1]);
-			window.dataFolders = Object.keys(dataFoldersMap);
-			getMultipleContents(dataFolders.map(folderName => "./data/" + folderName + "/_index.txt")).then(indexesResult => {
-				var html = '<div class="center">';
-				for (var i = 0; i < dataFolders.length; i++) {
-					html += createSelector(dataFolders[i], dataFoldersMap[dataFolders[i]], strToMap(indexesResult[i]));
-				}
-				html += '</div>'
-				document.getElementById('block').insertAdjacentHTML('beforeend', html);
-			});
-		});
+      const selectTemplate =
+        '<div class="container"><h4><b>${escapeHtml(title)}</h4><select id="${selectorId}">${options}</select></div>';
+      const optionTemplate =
+        '<option value="${escapeHtml(optValue)}">${escapeHtml(optName)}</option>';
 
-		async function getFullVTXProfile() {
-			const selection = getSelectorSelection('vtx');
-			fetch('./data/vtx_tables_full/' + selection.key + '.txt')
-				.then(response => response.blob())
-				.then(blob => {
-					const objectURL = URL.createObjectURL(blob);
-					// Fetch the text content from the blob and display it
-					blob.text().then(text => {
-						const vtxTextArea = document.getElementById('vtxTableText');
-						vtxTextArea.value = text;
-						vtxTextArea.style.display = "block";
-					});
+      async function fltByPIDExist() {
+        const motor = document.getElementById("motor");
 
-				})
-				.catch(error => console.error('Error fetching file:', error));
-		}
+        var i,
+          L = motor.options.length - 1;
+        for (i = L; i >= 0; i--) {
+          motor.remove(i);
+        }
 
-	</script>
-</head>
+        getMultipleContents(["./data/motor/_index.txt"]).then(
+          (indexesResult) => {
+            const opts = strToMap(indexesResult[0]);
+            const optsHtml = Object.keys(opts)
+              .map((key) => {
+                const fileURL =
+                  "./data/pid/" +
+                  document.getElementById("fc").value +
+                  "_" +
+                  document
+                    .getElementById("frame")
+                    .value.replace(/[\n\r]/g, "") +
+                  "_" +
+                  key +
+                  ".txt";
 
-<body>
-	<div class="container_background">
-		<div style="height: 110;">
-			<br>
-		</div>
+                if (fileExists(fileURL)) {
+                  const value = opts[key];
+                  return evaluateTemplate(optionTemplate, {
+                    optValue: key,
+                    optName: value,
+                  });
+                }
+              })
+              .join("\n");
 
-		<div class="container" id="block">
-			<h1>Генерація FPV профайла</h1>
-		</div>
-		<div class="center">
-			<div style="height: 100">
-				<br>
-			</div>
-			<div class="hor-group">
-				<button onclick="runGenProfile()" class="button">Скачати профіль</button>
-				<button onclick="getFullVTXProfile()" class="button">Повна VTX таблиця</button>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-	  <textarea id="vtxTableText" class="hidden_textarea"></textarea>
+            document
+              .getElementById("motor")
+              .insertAdjacentHTML("beforeend", optsHtml);
+          }
+        );
+      }
+
+      function createSelector(id, title, opts) {
+        //Create combobox
+        const optsHtml = Object.keys(opts)
+          .map((key) => {
+            const value = opts[key];
+            return evaluateTemplate(optionTemplate, {
+              optValue: key,
+              optName: value,
+            });
+          })
+          .join("\n");
+        return evaluateTemplate(selectTemplate, {
+          selectorId: id,
+          title,
+          options: optsHtml,
+        });
+      }
+
+      function strToList(str) {
+        return str.trim().split("\n");
+      }
+
+      function strToMap(str) {
+        const result = {};
+        const lines = strToList(str);
+        lines.forEach((line) => {
+          const [key, ...valueParts] = line.split("=");
+          const value = valueParts.length > 0 ? valueParts.join("=") : key;
+          result[key] = value;
+        });
+        return result;
+      }
+
+      getMultipleContents(["./data/template.txt", "./data/_index.txt"]).then(
+        (result) => {
+          window.profileTemplate = result[0];
+          window.uiParamsMap = strToMap(result[1]);
+          window.uiParams = Object.keys(uiParamsMap);
+          getMultipleContents(
+            uiParams.map((folderName) => "./data/" + folderName + "/_index.txt")
+          ).then((indexesResult) => {
+            var html = '<div class="center">';
+            for (var i = 0; i < uiParams.length; i++) {
+              html += createSelector(
+                uiParams[i],
+                uiParamsMap[uiParams[i]],
+                strToMap(indexesResult[i])
+              );
+            }
+            html += "</div>";
+            document
+              .getElementById("block")
+              .insertAdjacentHTML("beforeend", html);
+          });
+        }
+      );
+
+      async function getFullVTXProfile() {
+        const selection = getSelectorSelection("vtx");
+        fetch("./data/vtx_tables_full/" + selection.key + ".txt")
+          .then((response) => response.blob())
+          .then((blob) => {
+            const objectURL = URL.createObjectURL(blob);
+            // Fetch the text content from the blob and display it
+            blob.text().then((text) => {
+              const vtxTextArea = document.getElementById("vtxTableText");
+              vtxTextArea.value = text;
+              vtxTextArea.style.display = "block";
+            });
+          })
+          .catch((error) => console.error("Error fetching file:", error));
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="container_background">
+      <div style="height: 110">
+        <br />
+      </div>
+
+      <div class="group" id="block">
+        <h1>Генерація FPV профайла</h1>
+      </div>
+      <div class="center">
+        <div style="height: 100">
+          <br />
+        </div>
+        <div class="hor-group">
+          <button onclick="runGenProfile()" class="button">
+            Скачати профіль
+          </button>
+          <button onclick="getFullVTXProfile()" class="button">
+            Повна VTX таблиця
+          </button>
+          <button onclick="fltByPIDExist()" class="button">Фільтранути</button>
+        </div>
+      </div>
     </div>
-	<h4>
-		<a href="#" id="theme-toggle" data-i18n="theme_toggle">Switch theme</a>
-	</h4>
+    <div class="container">
+      <textarea id="vtxTableText" class="hidden_textarea"></textarea>
+    </div>
+    <h4>
+      <a href="#" id="theme-toggle" data-i18n="theme_toggle">Switch theme</a>
+    </h4>
 
-	<script src="theme.js"></script>
-</body>
-
+    <script src="theme.js"></script>
+  </body>
 </html>

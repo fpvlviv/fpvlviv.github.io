@@ -88,11 +88,9 @@ a:hover {
     margin: 5px auto;
     margin-top: 16px;    
     margin-bottom: 16px;
-    padding: 10px;
-    background: var(--container-background);
-    box-shadow: 0 0 10px var(--container-shadow);
+    padding: 1px;
     border-radius: 8px;
-    opacity: 0.97;
+    box-shadow: 0 0 10px;    
 }
 
 .tool {
@@ -188,13 +186,6 @@ a:hover {
         font-size: 12px;
     }
 
-    .container {
-        /* max-width: 90%; */
-        margin: 40px auto 8px;
-        padding: 10px;
-        box-shadow: none;
-    }
-
     label {
         display: block;
         margin-bottom: 5px;
@@ -249,10 +240,6 @@ a:hover {
 
     .levels-inputs span {
         margin: 0 3px !important;
-    }
-
-    .center {
-        width: 80% !important;
     }
 
     .back-button {
@@ -500,7 +487,7 @@ button:hover {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 60%;
 }
 
 .tooltip {
@@ -580,30 +567,21 @@ button:hover {
     opacity: 0.95;
 }
 
-.top-8 {
-    margin-top: 8px;
-}
-
-.bottom-15 {
-    margin-bottom: 15px;
-}
-
-.top-15 {
-    margin-top: 15px;
-}
-
-.left-16 {
-    margin-left: 16px;
-}
-
-#template-select-add-div {
-    display: none;
-}
-
 .highlighted {
     background-color: #eff6ff;
     padding: 8px;
     border-radius: 6px;
+}
+
+.group {
+    width: 60%;
+    padding: 5px;    
+    background: var(--container-background);
+    box-shadow: 0 0 10px var(--container-shadow);
+    border-radius: 20px;
+    opacity: 0.85;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 blockquote {
@@ -672,12 +650,14 @@ blockquote.good:before {
 div.container_background {
     max-width: 700px;
     margin: 32px auto;
-    margin-bottom: 16px;
+    margin-bottom: 1px;
     padding: 10px;
     box-shadow: 0 0 10px var(--container-shadow);
     border-radius: 8px;
     background: url(brand.jpg) ;
-    background-position: bottom left;
+    background-position: center ;
+    background-size: cover;
+    background-repeat: no-repeat;    
     border: 2px solid black;   
   }
 
