@@ -1,14 +1,4 @@
-board_name SPEEDYBEEF405V4
-manufacturer_id SPBE
-mcu_id 003000183433511030313835
-signature 
-
 # name: Peklo Toy
-
-# resources
-resource MOTOR 5 NONE
-resource SERVO 1 B15
-resource SERVO 2 C08
 
 # master
 set gyro_lpf1_static_hz = 200
