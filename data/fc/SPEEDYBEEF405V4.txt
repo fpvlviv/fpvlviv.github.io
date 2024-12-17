@@ -1,0 +1,7 @@
+board_name SPEEDYBEEF405V4
+manufacturer_id SPBE
+
+# resources
+resource MOTOR 5 NONE
+resource SERVO 1 B15
+resource SERVO 2 C08

@@ -10,6 +10,7 @@
 			'"': '&quot;',
 			"'": '&#39;'
 		};
+		
 		function escapeHtml(str) {
 			return str.replace(/[&<>"']/g, match => htmlEscapes[match]);
 		}
@@ -20,20 +21,31 @@
 		}
 
 		async function runGenProfile() {
-			const titles = [];
-			const urls = [];
-
-			dataFolders.forEach(dataFolder => {
-				const selection = getSelectorSelection(dataFolder);
-				titles.push(selection.value);
-				urls.push('./data/' + dataFolder + '/' + selection.key + '.txt');
-			});
-			const values = await getMultipleContents(urls);
-
-			const templateParams = {};
-			dataFolders.forEach((dataFolder, index) => {
-				templateParams[dataFolder] = values[index];
-			});
+			var titles = [];
+			var templateParams = {};
+			for (var propIdx in window.config.properties) {
+				var propCfg = window.config.properties[propIdx];
+				for (var selIdx in propCfg.selectors) {
+					var selectorCfg = propCfg.selectors[selIdx];
+					var selectedId = getSelectorSelection(selectorCfg.id).key;
+					titles.push(selectedId);
+					var currentFileName = selectedId + ".txt";
+					if (selectorCfg.optionfilters) {
+						var currentFileName = "";
+						for (var optFilterIdx in selectorCfg.optionfilters) {
+							var optFilterId = selectorCfg.optionfilters[optFilterIdx];
+							if (currentFileName.length > 0) {
+								currentFileName += "_";
+							}
+							currentFileName += getSelectorSelection(optFilterId).key;
+						}
+						currentFileName += "_" + selectedId + ".txt";
+					}
+					if (!selectorCfg.noData) {
+						templateParams[selectorCfg.id] = await getContent("./data/" + selectorCfg.id + "/" + currentFileName);
+					}
+				}
+			}
 
 			const profileContents = genProfile(templateParams);
 
@@ -62,13 +74,13 @@
 			return new Function("return `" + template + "`;").call();
 		}
 
-		async function getContent(url) {
+		async function getContent(url, json) {
 			const response = await fetch(url);
 			if (!response.ok) {
 				throw new Error(`Error: ${response.status}`);
 			}
-			const x = await response.text();
-			return x;
+			const content = await ( json ? response.json() : response.text());
+			return content;
 		}
 
 		async function getMultipleContents(urls) {
@@ -81,7 +93,7 @@
 			}
 		}
 
-		const selectTemplate = '<div><h4>${escapeHtml(title)}</h4><select id="${selectorId}">${options}</select></div>';
+		const selectTemplate = '<div id="selectcontainer_${selectorId}"><h4>${escapeHtml(title)}</h4><select id="${selectorId}">${options}</select></div>';
 		const optionTemplate = '<option value="${escapeHtml(optValue)}">${escapeHtml(optName)}</option>';
 
 		function createSelector(id, title, opts) {
@@ -107,20 +119,6 @@
 			return result;
 		}
 
-		getMultipleContents(["./data/template.txt", "./data/_index.txt"]).then(result => {
-			window.profileTemplate = result[0];
-			window.dataFoldersMap = strToMap(result[1]);
-			window.dataFolders = Object.keys(dataFoldersMap);
-			getMultipleContents(dataFolders.map(folderName => "./data/" + folderName + "/_index.txt")).then(indexesResult => {
-				var html = '<div class="center">';
-				for (var i = 0; i < dataFolders.length; i++) {
-					html += createSelector(dataFolders[i], dataFoldersMap[dataFolders[i]], strToMap(indexesResult[i]));
-				}
-				html += '</div>'
-				document.getElementById('block').insertAdjacentHTML('beforeend', html);
-			});
-		});
-
 		async function getFullVTXProfile() {
 			const selection = getSelectorSelection('vtx');
 			fetch('./data/vtx_tables_full/' + selection.key + '.txt')
@@ -137,7 +135,72 @@
 				})
 				.catch(error => console.error('Error fetching file:', error));
 		}
+		
+		function renderSelector(optionsIndex, selectorIndex) {
+			var levelConfig = window.config.properties[optionsIndex];
+			if (levelConfig) {
+				var optionsConfig = levelConfig.options;
+				var selectorConfig = levelConfig.selectors[selectorIndex];
+				var filteredOptionsConfig = optionsConfig;
+				if (selectorConfig.optionfilters) {
+					for (var filterIdx in selectorConfig.optionfilters) {
+						var filterId = selectorConfig.optionfilters[filterIdx];
+						var filterValue = getSelectorSelection(filterId).key;
+						var newFilteredOptionsConfig = [];
+						for (var optionIdx in filteredOptionsConfig) {
+							var option = filteredOptionsConfig[optionIdx];
+							if (option.ids[0] == filterValue) {
+								newFilteredOptionsConfig.push({
+									"name": option.name,
+									"ids": option.ids.slice(1)
+								});
+							}
+						}
+						filteredOptionsConfig = newFilteredOptionsConfig;
+					}
+				}
+				var optionsMap = {};
+				for (var optionIdx in filteredOptionsConfig) {
+					var optCfg = filteredOptionsConfig[optionIdx];
+					var id = optCfg.ids[0];
+					var nameVal = optCfg.name;
+					if (!nameVal) {
+						nameVal = levelConfig.optionnames[id];
+					}
+					optionsMap[id] = nameVal;
+				}
+				
+				var existingElement = document.getElementById('selectcontainer_' + selectorConfig.id);
+				if (existingElement) {
+					existingElement.parentElement.removeChild(existingElement);
+				}
+				
+				var selectorHTML = createSelector(selectorConfig.id, selectorConfig.name, optionsMap);
+				document.getElementById('block').insertAdjacentHTML('beforeend', selectorHTML);
+				var nextOptionsIndex = optionsIndex;
+				var nextSelectorIndex = selectorIndex;
+				if (levelConfig.selectors.length > (nextSelectorIndex+1)) {
+					nextSelectorIndex++;
+				} else {
+					nextOptionsIndex++;
+					nextSelectorIndex = 0;
+				}
+				var handler = () => {
+						renderSelector(nextOptionsIndex, nextSelectorIndex); 
+					};
+				document.getElementById(selectorConfig.id).addEventListener('change', handler, false);
+				handler();
+			}
+		}
 
+		getContent("./data/template.txt").then(template => {
+			window.profileTemplate = template;
+		});
+
+		getContent("./data/options.json", true).then(config => {
+			window.config = config;
+			renderSelector(0, 0);
+		});
 	</script>
 </head>
 
@@ -147,12 +210,11 @@
 			<br>
 		</div>
 
-		<div class="container" id="block">
+		<div class="container">
 			<h1>Генерація FPV профайла</h1>
 		</div>
 		<div class="center">
-			<div style="height: 100">
-				<br>
+			<div id="block">
 			</div>
 			<div class="hor-group">
 				<button onclick="runGenProfile()" class="button">Скачати профіль</button>

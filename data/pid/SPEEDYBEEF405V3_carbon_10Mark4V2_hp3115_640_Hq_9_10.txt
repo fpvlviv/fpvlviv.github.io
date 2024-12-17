@@ -2,11 +2,11 @@ profile 0
 
 # profile 0
 set profile_name = 9prop
-set p_pitch = 27
+set p_pitch = 40
 set i_pitch = 27
 set d_pitch = 25
 set f_pitch = 60
-set p_roll = 28
+set p_roll = 40
 set i_roll = 27
 set d_roll = 22
 set f_roll = 60
@@ -24,12 +24,11 @@ profile 1
 
 # profile 1
 set profile_name = 10prop
-set p_pitch = 20
-set i_pitch = 17
+set p_pitch = 45
+set i_pitch = 19
 set d_pitch = 17
 set f_pitch = 60
-set p_roll = 20
-set i_roll = 17
+set i_roll = 19
 set d_roll = 17
 set f_roll = 60
 set i_yaw = 60
@@ -55,12 +54,3 @@ rateprofile 3
 
 # restore original rateprofile selection
 rateprofile 0
-
-board_name SPEEDYBEEF405V3
-manufacturer_id SPBE
-mcu_id 002e003c3433510d32373636
-signature 
-
-# resources
-resource MOTOR 5 NONE
-resource SERVO 2 B00

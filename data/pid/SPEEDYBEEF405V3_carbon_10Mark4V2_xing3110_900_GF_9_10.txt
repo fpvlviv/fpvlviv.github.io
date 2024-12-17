@@ -54,12 +54,3 @@ rateprofile 3
 
 # restore original rateprofile selection
 rateprofile 0
-
-board_name SPEEDYBEEF405V3
-manufacturer_id SPBE
-mcu_id 002e003c3433510d32373636
-signature 
-
-# resources
-resource MOTOR 5 NONE
-resource SERVO 2 B00
