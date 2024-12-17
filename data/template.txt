@@ -53,6 +53,8 @@ rxfail 9 s 1000
 
 ${rcmode}
 
+${fc}
+
 ${pid}
 
 # save configuration
