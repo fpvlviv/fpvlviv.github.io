@@ -1,0 +1,98 @@
+{
+	"properties": [
+		{
+			"options": [
+				{"ids": ["SPEEDYBEEF405V3"], "name": "SpeedyBee F405 V3" },
+				{"ids": ["SPEEDYBEEF405V4"], "name": "SpeedyBee F405 V4" }
+			],
+			"selectors": [
+				{
+					"id": "fc",
+					"name": "Польотний контролер"
+				}
+			]
+		},
+		{
+			"options": [
+				{"ids":["SPEEDYBEEF405V3", "carbon_8Mark4V2",      "BHAvenger2812_900_GF_8"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "BatS3115_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "BHAvenger2812_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "hp3115_640_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "R3115_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "xing2814_880_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "xing2814_1100_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "xing3110_900_GF_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Xframe",      "BatS3115_900_Hq_9"]},
+				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "BatS3110_800_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "BatS3115_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "BHAvenger2812_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "Emax2814_730_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "BatS3214_730_GF_1070"]}
+			],
+			"optionnames": {
+				"carbon_10Mark4V2": "Carbon 10\" Mark4 v2",
+				"carbon_10Xframe": "Carbon 10\" X-frame",
+				"carbon_8Mark4V2": "Carbon 8\" Mark4 v2",
+				"fiberglass_10Mark4V2": "Fiberglass 10\" Mark4 v2",
+				"BHAvenger2812_900_GF_8": "BHAvenger2812 900KV, Hq9-10",
+				"BatS3115_900_Hq_9_10": "BatS3115 900KV, Hq9-10",
+				"BHAvenger2812_900_Hq_9_10": "BHAvenger2812 900 Hq 9 10",
+				"hp3115_640_Hq_9_10": "hp3115_640KV, Hq9-10",
+				"R3115_900_Hq_9_10":"R3115_900KV, Hq9-10",
+				"xing2814_880_Hq_9_10":"Xing2814 880KV, Hq9-10",
+				"xing2814_1100_Hq_9_10":"Xing2814 1100KV, Hq9-10",
+				"xing3110_900_GF_9_10":"Xing3110 900KV, GF9-10",
+				"BatS3115_900_Hq_9":"BatS3115 900KV, Hq-9",
+				"BatS3110_800_Hq_9_10":"BatS3110 800KV, Hq9-10",
+				"BatS3115_900_Hq_9_10":"BatS3115 900KV, Hq9-10",
+				"BHAvenger2812_900_Hq_9_10":"BHAvenger2812 900KV, Hq9-10",
+				"Emax2814_730_Hq_9_10":"Emax2814 730KV, Hq9-10",
+				"BatS3214_730_GF_1070":"BatS3214 730KV, 1070"
+			},
+			"selectors": [
+				{
+					"id": "frame",
+					"name": "Рама",
+					"optionfilters": ["fc"],
+					"noData": true
+				},
+				{
+					"id": "pid",
+					"name": "Мотори та пропелери",
+					"optionfilters": ["fc", "frame"]
+				}
+			]
+		},
+		{
+			"options": [
+				{"ids": ["akk_dominator"], "name":"AKK Dominator" },
+				{"ids": ["akk_raceranger"], "name":"AKK Race Ranger (4.9 Ghz)" },
+				{"ids": ["akk_Ultra_25"], "name":"AKK Ultra long range 25mW Pit Mode" },
+				{"ids": ["akk_Ultra_25_AllChannels"], "name":"AKK Ultra long range 25mW Pit Mode (4.9 Ghz)" },
+				{"ids": ["akk_Ultra_250"], "name":"AKK Ultra long range 250mW min" },
+				{"ids": ["rushfpv_maxsolo"], "name":"RushFPV Max Solo" },
+				{"ids": ["tbs_Unify_2W"], "name":"TBS UNIFY PRO32 2W (4.9 Ghz)" },
+				{"ids": ["ultra_2500_AllChannels"], "name":"Ultra2500 2.5W VTX (4.9 Ghz)" },
+				{"ids": ["Foxeer_Reaper_Extreme_3W_72Ch"], "name":"Foxeer Reaper Extreme 3W 72Ch" }
+			],
+			"selectors": [
+				{
+					"id": "vtx",
+					"name": "Відеопередавач"
+				}
+			]
+		},
+		{
+			"options": [
+				{"ids": ["Kraken"], "name":"Кракен" },
+				{"ids": ["B41"], "name":"41 бригада" }
+			],
+			"selectors": [
+				{
+					"id": "rcmode",
+					"name": "Режим керування"
+				}
+			]
+		}
+	]
+}
