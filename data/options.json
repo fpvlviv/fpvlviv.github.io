@@ -74,8 +74,8 @@
 				{"ids": ["tbs_Unify_2W"], "name":"TBS UNIFY PRO32 2W (4.9 Ghz)" },
 				{"ids": ["ultra_2500_AllChannels"], "name":"Ultra2500 2.5W VTX (4.9 Ghz)" },
 				{"ids": ["Foxeer_Reaper_Extreme_3W_72Ch"], "name":"Foxeer Reaper Extreme 3W 72Ch" },
-				{"ids": ["rushfpv_3G3_band_a.txt"], "name": "RushFPV 3.3GHz Band A" },
-				{"ids": ["rushfpv_3G3_band_a_plus_b.txt"], "name": "RushFPV 3.3GHz Band A+B (custom made)" }
+				{"ids": ["rushfpv_3G3_band_a"], "name": "RushFPV 3.3GHz Band A" },
+				{"ids": ["rushfpv_3G3_band_a_plus_b"], "name": "RushFPV 3.3GHz Band A+B (custom made)" }
 			],
 			"selectors": [
 				{
