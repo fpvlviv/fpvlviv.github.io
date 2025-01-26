@@ -1,0 +1,5 @@
+board_name OMNIBUSF4SD
+manufacturer_id AIRB
+
+# resources
+resource MOTOR 5 NONE
