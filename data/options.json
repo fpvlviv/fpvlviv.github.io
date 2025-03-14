@@ -29,8 +29,10 @@
 				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "BHAvenger2812_900_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "Emax2814_730_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "BatS3214_730_GF_1070"]},
-				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "KN3214_730_GF_1070"]},								
-				{"ids":["OMNIBUSF4SD", "carbon_10Mark4V2",     "BatS3115_900_Hq_9_10"]}
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "KN3214_730_GF_1070"]},
+				{"ids":["OMNIBUSF4SD", "carbon_10Mark4V2",     "BatS3115_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "BatS3214_730_GF_1070"]},
+				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",      "R3115_900_Hq_9_10"]}
 			],
 			"optionnames": {
 				"carbon_10Mark4V2": "Carbon 10\" Mark4 v2",
