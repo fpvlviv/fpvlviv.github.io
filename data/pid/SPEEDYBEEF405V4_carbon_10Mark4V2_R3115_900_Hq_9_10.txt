@@ -2,11 +2,10 @@ profile 0
 
 # profile 0
 set profile_name = 10prop
-set dterm_lpf1_dyn_min_hz = 67
-set dterm_lpf1_dyn_max_hz = 135
-set dterm_lpf1_static_hz = 67
-set dterm_lpf2_static_hz = 135
-set simplified_dterm_filter_multiplier = 90
+set f_pitch = 60
+set f_roll = 60
+set f_yaw = 60
+set simplified_pids_mode = OFF
 
 profile 1
 
@@ -18,11 +17,6 @@ profile 3
 profile 0
 
 rateprofile 0
-
-# rateprofile 0
-set roll_srate = 30
-set pitch_srate = 30
-set yaw_srate = 20
 
 rateprofile 1
 
