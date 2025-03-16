@@ -1,15 +1,15 @@
 # name: Peklo Toy
 
 # master
-set gyro_lpf1_static_hz = 200
-set gyro_lpf2_static_hz = 400
-set dyn_notch_count = 2
-set dyn_notch_q = 500
-set dyn_notch_min_hz = 70
+set gyro_lpf1_static_hz = 125
+set gyro_lpf2_static_hz = 250
+set dyn_notch_count = 5
+set dyn_notch_min_hz = 25
 set dyn_notch_max_hz = 400
-set gyro_lpf1_dyn_min_hz = 200
-set gyro_lpf1_dyn_max_hz = 400
-set acc_calibration = -44,-41,50,1
+set gyro_lpf1_dyn_min_hz = 125
+set gyro_lpf1_dyn_max_hz = 250
+set acc_calibration = 106,21,0,1
+set mag_hardware = NONE
 set blackbox_sample_rate = 1/8
 set blackbox_device = NONE
 set dshot_bidir = ON
@@ -20,7 +20,9 @@ set bat_capacity = 8400
 set vbat_min_cell_voltage = 300
 set vbat_warning_cell_voltage = 330
 set small_angle = 180
-set simplified_gyro_filter_multiplier = 80
+set pid_process_denom = 2
+set simplified_gyro_filter = OFF
+set simplified_gyro_filter_multiplier = 50
 set osd_cap_alarm = 6600
 set osd_vbat_pos = 2048
 set osd_rssi_pos = 2359
@@ -58,5 +60,5 @@ set vtx_power = 1
 set vtx_low_power_disarm = ON
 set vtx_freq = 5805
 set vcd_video_system = AUTO
-set rpm_filter_min_hz = 90
+set rpm_filter_min_hz = 55
 set craft_name = Peklo Toy
