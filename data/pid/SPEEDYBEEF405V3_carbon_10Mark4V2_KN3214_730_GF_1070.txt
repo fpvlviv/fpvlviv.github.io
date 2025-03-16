@@ -1,7 +1,7 @@
 profile 0
 
 # profile 0
-set profile_name = 10prop
+set profile_name = 1070
 set dterm_lpf1_dyn_min_hz = 60
 set dterm_lpf1_dyn_max_hz = 120
 set dterm_lpf1_static_hz = 60
@@ -17,17 +17,40 @@ set i_yaw = 60
 set f_yaw = 60
 set d_min_roll = 15
 set d_min_pitch = 15
+set thrust_linear = 25
 set simplified_pids_mode = OFF
 set simplified_dterm_filter_multiplier = 80
 
 profile 1
+
+# profile 1
+set profile_name = 1050
+set dterm_lpf1_dyn_min_hz = 60
+set dterm_lpf1_dyn_max_hz = 120
+set dterm_lpf1_static_hz = 60
+set dterm_lpf2_static_hz = 120
+set p_pitch = 40
+set i_pitch = 20
+set d_pitch = 15
+set f_pitch = 60
+set p_roll = 40
+set i_roll = 20
+set d_roll = 15
+set f_roll = 60
+set i_yaw = 60
+set f_yaw = 60
+set d_min_roll = 15
+set d_min_pitch = 15
+set thrust_linear = 25
+set simplified_pids_mode = OFF
+set simplified_dterm_filter_multiplier = 80
 
 profile 2
 
 profile 3
 
 # restore original profile selection
-profile 0
+profile 1
 
 rateprofile 0
 
