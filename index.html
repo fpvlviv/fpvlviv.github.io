@@ -129,7 +129,7 @@
 					blob.text().then(text => {
 						const vtxTextArea = document.getElementById('vtxTableText');
 						vtxTextArea.value = text;
-						vtxTextArea.style.display = "block";
+						vtxTextArea.parentElement.style.display = "block";
 					});
 
 				})
@@ -222,8 +222,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-	  <textarea id="vtxTableText" class="hidden_textarea"></textarea>
+	<div class="container" style="display: none">
+	  <textarea id="vtxTableText" class="fullvtxtable"></textarea>
     </div>
 	<h4>
 		<a href="#" id="theme-toggle" data-i18n="theme_toggle">Switch theme</a>

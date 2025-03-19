@@ -679,9 +679,9 @@ div.container_background {
     background: url(brand.jpg) ;
     background-position: bottom left;
     border: 2px solid black;   
-  }
+}
 
-  textarea.hidden_textarea {
+.fullvtxtable {
     width: 100%;     
     height: 200px;
     resize: none; 
@@ -689,5 +689,4 @@ div.container_background {
     border-radius: 8px;
     box-sizing: border-box; 
     font-family: monospace;
-    display: none;
-}  
+}
