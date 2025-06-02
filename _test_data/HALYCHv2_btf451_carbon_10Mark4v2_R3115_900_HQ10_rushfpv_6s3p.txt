@@ -1,0 +1,218 @@
+defaults nosave
+
+
+# version
+# Betaflight / STM32F405 (S405) 4.5.1 Jan 29 2025 / 09:26:13 (norevision) MSP API: 1.46
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name MODULE149V2
+manufacturer_id LVIV
+mcu_id 002800423034500520393847
+signature 
+
+# name: Peklo Toy
+
+# feature
+feature OSD
+
+# serial
+serial 5 8192 115200 57600 0 115200
+
+# servo
+servo 0 1000 2000 1500 100 9
+servo 1 1000 2500 1500 100 8
+
+# aux
+aux 0 0 0 1700 2100 0 0
+aux 1 1 2 1675 2100 0 0
+aux 2 2 2 1300 1700 0 0
+
+# rxrange
+rxrange 0 989 2012
+rxrange 1 989 2012
+rxrange 2 989 2012
+rxrange 3 989 2012
+
+# vtxtable
+vtxtable bands 2
+vtxtable channels 8
+vtxtable band 1 BAND-A   A CUSTOM  3330 3350 3370 3390 3410 3430 3450 3470
+vtxtable band 2 BAND-B   B CUSTOM  3170 3190 3210 3230 3250 3270 3290 3310
+vtxtable powerlevels 3
+vtxtable powervalues 25 1000 4000
+vtxtable powerlabels 25 1 4
+
+# vtx
+vtx 0 1 0 0 1 900 1200
+vtx 1 1 0 0 2 1200 1800
+vtx 2 1 0 0 3 1800 2100
+
+# master
+set gyro_lpf1_static_hz = 75
+set gyro_lpf2_static_hz = 150
+set dyn_notch_count = 1
+set dyn_notch_q = 500
+set gyro_lpf1_dyn_min_hz = 75
+set gyro_lpf1_dyn_max_hz = 150
+set acc_calibration = 18,9,-5,1
+set dshot_idle_value = 1000
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_recovery_delay = 10
+set vbat_min_cell_voltage = 270
+set vbat_warning_cell_voltage = 300
+set small_angle = 180
+set pid_process_denom = 2
+set simplified_gyro_filter_multiplier = 30
+set sdcard_detect_inverted = ON
+set osd_warn_bitmask = 264191
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2359
+set osd_link_quality_pos = 2423
+set osd_link_tx_power_pos = 234
+set osd_rssi_dbm_pos = 2391
+set osd_rsnr_pos = 234
+set osd_tim_1_pos = 234
+set osd_tim_2_pos = 2455
+set osd_remaining_time_estimate_pos = 234
+set osd_flymode_pos = 2074
+set osd_anti_gravity_pos = 234
+set osd_g_force_pos = 234
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 18521
+set osd_crosshairs_pos = 2285
+set osd_ah_sbar_pos = 206
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_wh_drawn_pos = 105
+set osd_motor_diag_pos = 234
+set osd_craft_name_pos = 2442
+set osd_pilot_name_pos = 234
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_flight_dist_pos = 234
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pid_roll_pos = 234
+set osd_pid_pitch_pos = 234
+set osd_pid_yaw_pos = 234
+set osd_debug_pos = 234
+set osd_power_pos = 234
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_pit_ang_pos = 234
+set osd_rol_ang_pos = 234
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_nheading_pos = 234
+set osd_up_down_reference_pos = 205
+set osd_ready_mode_pos = 234
+set osd_esc_tmp_pos = 234
+set osd_esc_rpm_pos = 234
+set osd_esc_rpm_freq_pos = 234
+set osd_rtc_date_time_pos = 234
+set osd_adjustment_range_pos = 234
+set osd_flip_arrow_pos = 234
+set osd_core_temp_pos = 234
+set osd_log_status_pos = 234
+set osd_stick_overlay_left_pos = 234
+set osd_stick_overlay_right_pos = 234
+set osd_rate_profile_name_pos = 234
+set osd_pid_profile_name_pos = 234
+set osd_profile_name_pos = 234
+set osd_rcchannels_pos = 234
+set osd_camera_frame_pos = 41
+set osd_efficiency_pos = 294
+set osd_total_flights_pos = 234
+set osd_aux_pos = 234
+set osd_sys_goggle_voltage_pos = 234
+set osd_sys_vtx_voltage_pos = 234
+set osd_sys_bitrate_pos = 234
+set osd_sys_delay_pos = 234
+set osd_sys_distance_pos = 234
+set osd_sys_lq_pos = 234
+set osd_sys_goggle_dvr_pos = 234
+set osd_sys_vtx_dvr_pos = 234
+set osd_sys_warnings_pos = 234
+set osd_sys_vtx_temp_pos = 234
+set osd_sys_fan_speed_pos = 234
+set osd_stat_bitmask = 18876398
+set osd_displayport_device = AUTO
+set osd_camera_frame_width = 11
+set osd_camera_frame_height = 8
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 2
+set vtx_freq = 3390
+set vcd_video_system = AUTO
+set displayport_msp_fonts = 0,0,0,0
+set pinio_config = 1,1,1,1
+set pinio_box = 40,41,255,255
+set gyro_2_bustype = SPI
+set gyro_2_sensor_align = CW0
+set rpm_filter_min_hz = 70
+set craft_name = Peklo Toy
+
+profile 0
+
+# profile 0
+set dterm_lpf1_dyn_min_hz = 52
+set dterm_lpf1_dyn_max_hz = 105
+set dterm_lpf1_static_hz = 52
+set dterm_lpf2_static_hz = 105
+set yaw_lowpass_hz = 70
+set p_pitch = 35
+set i_pitch = 34
+set d_pitch = 20
+set f_pitch = 37
+set i_roll = 44
+set d_roll = 17
+set f_roll = 47
+set i_yaw = 44
+set f_yaw = 47
+set horizon_level_strength = 50
+set d_min_roll = 17
+set d_min_pitch = 20
+set dyn_idle_min_rpm = 50
+set simplified_i_gain = 55
+set simplified_d_gain = 60
+set simplified_dmax_gain = 0
+set simplified_feedforward_gain = 40
+set simplified_pitch_pi_gain = 75
+set simplified_dterm_filter_multiplier = 70
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
