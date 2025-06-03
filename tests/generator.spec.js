@@ -26,7 +26,7 @@ test('Test file gen', async ({ browser }) => {
   await download.saveAs(filePath);
 
   const content = await fs.readFile(filePath, 'utf8');
-  const expectedContent = await fs.readFile(path.resolve(__dirname, '../_test_data/SPEEDYBEEF405v3_btf443_carbon_10Mark4v2_R3115_900_Hq_9_10_akk_ultimate.txt'), 'utf8');
+  const expectedContent = await fs.readFile(path.resolve(__dirname, '../_reference_data/SPEEDYBEEF405v3_btf443_carbon_10Mark4v2_R3115_900_Hq_9_10_akk_ultimate.txt'), 'utf8');
   
   const expectedLines = expectedContent
     .split('\n')
