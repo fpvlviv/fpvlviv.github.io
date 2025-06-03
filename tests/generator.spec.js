@@ -8,11 +8,16 @@ test('Test file gen', async ({ browser }) => {
 
   await page.goto('http://localhost:3000/index.html');
 
-  // Trigger the file download in your app
+  await page.selectOption('#fc', 'SPEEDYBEEF405V3');
+  await page.selectOption('#frame', 'carbon_10Mark4V2');
+  await page.selectOption('#pid', 'R3115_900_Hq_9_10');
+  await page.selectOption('#vtx', 'akk_Ultra_25');
+  await page.selectOption('#rcmode', 'B41');
+  
   const [download] = await Promise.all([
     page.waitForEvent('download'),
-    page.click('#genprofilebtn') // Replace with your actual trigger
-  ]);
+    page.click('#genprofilebtn')
+  ]);  
 
   const downloadPath = path.resolve(__dirname, '../_test_downloads');
   await fs.mkdir(downloadPath, { recursive: true });
@@ -21,5 +26,20 @@ test('Test file gen', async ({ browser }) => {
   await download.saveAs(filePath);
 
   const content = await fs.readFile(filePath, 'utf8');
-  expect(content).toContain('a = b ');
+  const expectedContent = await fs.readFile(path.resolve(__dirname, '../_test_data/SPEEDYBEEF405v3_btf443_carbon_10Mark4v2_R3115_900_Hq_9_10_akk_ultimate.txt'), 'utf8');
+  
+  const expectedLines = expectedContent
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line !== '')
+    .filter(line => !line.startsWith('#'))
+    .filter(line => line != 'signature')
+    .filter(line => !line.startsWith('aux '))
+    .filter(line => !line.startsWith('vtxtable '))
+    .filter(line => !line.startsWith('set acc_calibration '))
+    .filter(line => !line.startsWith('mcu_id '));
+
+  for (const line of expectedLines) {
+    expect(content).toContain(line);
+  }
 });
