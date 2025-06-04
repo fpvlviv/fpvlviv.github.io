@@ -1,3 +1,5 @@
+// Run via npm run test:full
+
 import { test, expect } from '@playwright/test';
 import path from 'path';
 import fs from 'fs/promises';
