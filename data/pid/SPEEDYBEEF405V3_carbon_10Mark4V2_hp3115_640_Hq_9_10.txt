@@ -1,3 +1,31 @@
+# master pid
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set dyn_notch_count = 2
+set dyn_notch_q = 500
+set dyn_notch_min_hz = 70
+set dyn_notch_max_hz = 300
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_dyn_max_hz = 400
+set acc_calibration = -62,-1,10,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set small_angle = 180
+set simplified_gyro_filter_multiplier = 80
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 3
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set rpm_filter_min_hz = 90
+set craft_name = Bimber41
+
+
 profile 0
 
 # profile 0
