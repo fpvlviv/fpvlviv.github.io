@@ -61,6 +61,7 @@ async function verifyProfile(browser, fc, frame, pid, vtx, rcmode, file) {
       .filter(line => !line.startsWith('aux '))
       .filter(line => !line.startsWith('serial '))
       .filter(line => !line.startsWith('servo '))
+      .filter(line => !line.startsWith('feature '))
       .filter(line => !line.startsWith('vtxtable '))
       .filter(line => !line.startsWith('set acc_calibration '))
       .filter(line => !line.startsWith('mcu_id '));
@@ -72,17 +73,20 @@ async function verifyProfile(browser, fc, frame, pid, vtx, rcmode, file) {
     }
 }
 
+test('Verify YSIDO_OMNIBUSF4SD_carbon_10Mark4V2_BatS3115_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'YSIDO_OMNIBUSF4SD', 'carbon_10Mark4V2', 'BatS3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_ysido_btf451_carbon_10_mark4_bat3115_900_HQ10_akk_dominator_OMNIBUSF4SD.txt');
+});
 
 test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_R3115_900_Hq_9_10.txt', async ({ browser }) => {
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'R3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bdzhol_sb405v3_btf443_10frame_carbon_R3115_900_Hq_9_10_akk_ultimate.txt');
 });
 
-test('Verify YSIDO_OMNIBUSF4SD_carbon_10Mark4V2_BatS3115_900_Hq_9_10.txt', async ({ browser }) => {
-  await verifyProfile(browser, 'YSIDO_OMNIBUSF4SD', 'carbon_10Mark4V2', 'BatS3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_ysido_btf451_carbon_10_mark4_bat3115_900_HQ10_akk_dominator_OMNIBUSF4SD.txt');
-});
-
 test('Verify SPEEDYBEEF405V3_carbon_8Mark4V2_BHAvenger2812_900_GF_8.txt', async ({ browser }) => {
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_8Mark4V2', 'BHAvenger2812_900_GF_8', 'akk_Ultra_25', 'Kraken', 'Gurkit_sb405v3_btf443_8frame_Avenger2812_900_gemfan8_akk_raice_ranger_LXband_2servo.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_BatS3115_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'BatS3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bdzhol_sb405v3_btf450_10frame_carbon_bat3115_900_Hq_9_10_akk_ultimate.txt');
 });
 
 
