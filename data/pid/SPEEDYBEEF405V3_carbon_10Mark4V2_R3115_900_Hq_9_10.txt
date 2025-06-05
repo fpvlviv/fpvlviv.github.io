@@ -1,3 +1,30 @@
+# master pids
+set acc_calibration = -1,-8,16,1
+set bat_capacity = 8400
+set blackbox_device = NONE
+set blackbox_sample_rate = 1/8
+set craft_name = Bdzhol
+set dshot_bidir = ON
+set dyn_notch_count = 2
+set dyn_notch_max_hz = 400
+set dyn_notch_min_hz = 70
+set dyn_notch_q = 500
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set gyro_lpf1_dyn_max_hz = 400
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set motor_pwm_protocol = DSHOT300
+set rpm_filter_min_hz = 90
+set simplified_gyro_filter_multiplier = 80
+set small_angle = 180
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_freq = 5805
+set vtx_low_power_disarm = ON
+set vtx_power = 4
+
 profile 0
 
 # profile 0

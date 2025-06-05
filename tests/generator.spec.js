@@ -25,48 +25,65 @@ test.afterAll(async () => {
   }
 });
 
+async function verifyProfile(browser, fc, frame, pid, vtx, rcmode, file) {
+    const context = await browser.newContext({ acceptDownloads: true });
+    const page = await context.newPage();
 
-// test('Test file gen', async ({ browser }) => {
-//   const context = await browser.newContext({ acceptDownloads: true });
-//   const page = await context.newPage();
-//
-//   await page.goto('http://localhost:3000/index.html');
-//
-//   await page.selectOption('#fc', 'SPEEDYBEEF405V3');
-//   await page.selectOption('#frame', 'carbon_10Mark4V2');
-//   await page.selectOption('#pid', 'R3115_900_Hq_9_10');
-//   await page.selectOption('#vtx', 'akk_Ultra_25');
-//   await page.selectOption('#rcmode', 'B41');
-//
-//   const [download] = await Promise.all([
-//     page.waitForEvent('download'),
-//     page.click('#genprofilebtn')
-//   ]);
-//
-//   const downloadPath = path.resolve(__dirname, '../_test_downloads');
-//   await fs.mkdir(downloadPath, { recursive: true });
-//
-//   const filePath = path.join(downloadPath, await download.suggestedFilename());
-//   await download.saveAs(filePath);
-//
-//   const content = await fs.readFile(filePath, 'utf8');
-//   const expectedContent = await fs.readFile(path.resolve(__dirname, '../_reference_data/SPEEDYBEEF405v3_btf443_carbon_10Mark4v2_R3115_900_Hq_9_10_akk_ultimate.txt'), 'utf8');
-//
-//   const expectedLines = expectedContent
-//     .split('\n')
-//     .map(line => line.trim())
-//     .filter(line => line !== '')
-//     .filter(line => !line.startsWith('#'))
-//     .filter(line => line != 'signature')
-//     .filter(line => !line.startsWith('aux '))
-//     .filter(line => !line.startsWith('vtxtable '))
-//     .filter(line => !line.startsWith('set acc_calibration '))
-//     .filter(line => !line.startsWith('mcu_id '));
-//
-//   for (const line of expectedLines) {
-//     expect(content).toContain(line);
-//   }
-// });
+    await page.goto('http://localhost:3000/index.html');
+
+    await page.selectOption('#fc', fc);
+    await page.selectOption('#frame', frame);
+    await page.selectOption('#pid', pid);
+    await page.selectOption('#vtx', vtx);
+    await page.selectOption('#rcmode', rcmode);
+
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      page.click('#genprofilebtn')
+    ]);
+
+    const downloadPath = path.resolve(__dirname, '../_test_downloads');
+    await fs.mkdir(downloadPath, { recursive: true });
+
+    const filePath = path.join(downloadPath, await download.suggestedFilename());
+    await download.saveAs(filePath);
+
+    const content = await fs.readFile(filePath, 'utf8');
+    const expectedContent = await fs.readFile(path.resolve(__dirname, '../_reference_data/'+file), 'utf8');
+
+    const expectedLines = expectedContent
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line !== '')
+      .filter(line => !line.startsWith('#'))
+      .filter(line => !line.startsWith('set osd_'))
+      .filter(line => line != 'signature')
+      .filter(line => !line.startsWith('aux '))
+      .filter(line => !line.startsWith('serial '))
+      .filter(line => !line.startsWith('servo '))
+      .filter(line => !line.startsWith('vtxtable '))
+      .filter(line => !line.startsWith('set acc_calibration '))
+      .filter(line => !line.startsWith('mcu_id '));
+
+    for (const line of expectedLines) {
+		if (!!line) {
+		  expect(content).toContain(line);
+	  	}
+    }
+}
+
+
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_R3115_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'R3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bdzhol_sb405v3_btf443_10frame_carbon_R3115_900_Hq_9_10_akk_ultimate.txt');
+});
+
+test('Verify YSIDO_OMNIBUSF4SD_carbon_10Mark4V2_BatS3115_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'YSIDO_OMNIBUSF4SD', 'carbon_10Mark4V2', 'BatS3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_ysido_btf451_carbon_10_mark4_bat3115_900_HQ10_akk_dominator_OMNIBUSF4SD.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_carbon_8Mark4V2_BHAvenger2812_900_GF_8.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_8Mark4V2', 'BHAvenger2812_900_GF_8', 'akk_Ultra_25', 'Kraken', 'Gurkit_sb405v3_btf443_8frame_Avenger2812_900_gemfan8_akk_raice_ranger_LXband_2servo.txt');
+});
 
 
 test('All permutations generate a non-empty file', async ({ browser }) => {
@@ -80,12 +97,10 @@ test('All permutations generate a non-empty file', async ({ browser }) => {
   page.on('pageerror', (err) => console.error('Page error:', err));
   page.on('console', (msg) => console.log(`Console [${msg.type()}]: ${msg.text()}`));
 
-  /** grabs option values of a <select> */
   const optionsOf = (id) =>
     page.$$eval(`#${id} option`, (opts) => opts.map((o) => o.value));
 
-  /** selects value and waits until the next <select> has at least 1 option */
-  const choose = async (id, value, nextId) => {
+	const choose = async (id, value, nextId) => {
     await page.selectOption(`#${id}`, value);
     if (nextId) {
       await page.waitForFunction(

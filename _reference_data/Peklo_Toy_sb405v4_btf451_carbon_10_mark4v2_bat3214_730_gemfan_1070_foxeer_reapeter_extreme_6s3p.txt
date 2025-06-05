@@ -72,59 +72,59 @@ vtx 1 1 0 0 2 1200 1800
 vtx 2 1 0 0 3 1800 2100
 
 # master
-set acc_calibration = -17,14,78,1
-set craft_name = Peklo Toy
-set debug_mode = GYRO_SCALED
-set dshot_bidir = ON
-set dyn_notch_count = 1
-set dyn_notch_max_hz = 400
-set dyn_notch_min_hz = 60
-set dyn_notch_q = 500
-set gyro_lpf1_dyn_max_hz = 350
-set gyro_lpf1_dyn_min_hz = 175
 set gyro_lpf1_static_hz = 175
 set gyro_lpf2_static_hz = 350
+set dyn_notch_count = 1
+set dyn_notch_q = 500
+set dyn_notch_min_hz = 60
+set dyn_notch_max_hz = 400
+set gyro_lpf1_dyn_min_hz = 175
+set gyro_lpf1_dyn_max_hz = 350
+set acc_calibration = -17,14,78,1
+set dshot_bidir = ON
 set motor_pwm_protocol = DSHOT300
-set osd_ah_pos = 2158
-set osd_altitude_pos = 2102
-set osd_avg_cell_voltage_pos = 2080
-set osd_battery_usage_pos = 0
-set osd_canvas_height = 13
-set osd_canvas_width = 30
+set pid_process_denom = 2
+set simplified_gyro_filter_multiplier = 70
 set osd_cap_alarm = 6600
-set osd_compass_bar_pos = 75
-set osd_craft_name_pos = 2442
-set osd_crosshairs_pos = 2285
-set osd_current_pos = 2112
-set osd_disarmed_pos = 2251
-set osd_displayport_device = AUTO
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2359
+set osd_link_quality_pos = 2423
+set osd_rssi_dbm_pos = 2391
+set osd_tim_2_pos = 2455
 set osd_flymode_pos = 2073
-set osd_gps_lat_pos = 0
-set osd_gps_lon_pos = 17
-set osd_gps_sats_pos = 58
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 18522
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2442
 set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
 set osd_home_dir_pos = 46
 set osd_home_dist_pos = 47
-set osd_link_quality_pos = 2423
-set osd_mah_drawn_pos = 2145
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2102
 set osd_pidrate_profile_pos = 346
-set osd_rssi_dbm_pos = 2391
-set osd_rssi_pos = 2359
-set osd_stat_bitmask = 2111278
-set osd_throttle_pos = 2400
-set osd_tim_2_pos = 2455
-set osd_vbat_pos = 2048
-set osd_vtx_channel_pos = 18522
 set osd_warnings_pos = 2186
-set pid_process_denom = 2
-set rpm_filter_min_hz = 60
-set simplified_gyro_filter_multiplier = 70
-set vcd_video_system = AUTO
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2111278
+set osd_displayport_device = AUTO
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set debug_mode = GYRO_SCALED
 set vtx_band = 1
 set vtx_channel = 4
-set vtx_freq = 5805
-set vtx_low_power_disarm = ON
 set vtx_power = 2
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set vcd_video_system = AUTO
+set rpm_filter_min_hz = 60
+set craft_name = Peklo Toy
 
 profile 0
 
@@ -143,7 +143,6 @@ profile 2
 profile 3
 
 # restore original profile selection
-
 profile 0
 
 rateprofile 0
