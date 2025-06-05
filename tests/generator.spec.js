@@ -94,6 +94,10 @@ test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_BatS3214_730_GF_1070.txt', async (
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'BatS3214_730_GF_1070', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_bat3214_730_HQ10_rushfpv33_6s3p.txt');
 });
 
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_BHAvenger2812_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'BatS3214_730_GF_1070', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_bat3214_730_HQ10_rushfpv33_6s3p.txt');
+});
+
 test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_hp3115_640_Hq_9_10.txt', async ({ browser }) => {
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'hp3115_640_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bimber41_sb405v3_btf443_10frame_carbon_3115_640_Hq10_akk_ultimate_2servo.txt');
 });
