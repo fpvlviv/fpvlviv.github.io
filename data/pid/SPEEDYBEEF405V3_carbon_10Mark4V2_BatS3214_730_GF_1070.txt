@@ -1,3 +1,25 @@
+# master pid
+set gyro_lpf1_static_hz = 150
+set gyro_lpf2_static_hz = 300
+set dyn_notch_q = 500
+set dyn_notch_min_hz = 60
+set dyn_notch_max_hz = 200
+set gyro_lpf1_dyn_min_hz = 150
+set gyro_lpf1_dyn_max_hz = 300
+set acc_calibration = -17,14,78,1
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set simplified_gyro_filter_multiplier = 60
+set debug_mode = GYRO_SCALED
+set vtx_band = 1
+set vtx_channel = 1
+set vtx_power = 2
+set vtx_low_power_disarm = ON
+set vtx_freq = 3330
+set vcd_video_system = AUTO
+set rpm_filter_min_hz = 60
+set craft_name = Peklo Toy
+
 profile 0
 
 # profile 0

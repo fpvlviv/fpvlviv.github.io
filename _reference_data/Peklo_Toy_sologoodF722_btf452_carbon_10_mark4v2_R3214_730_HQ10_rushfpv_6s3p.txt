@@ -1,0 +1,191 @@
+defaults nosave
+
+
+# version
+# Betaflight / STM32F7X2 (S7X2) 4.5.2 May 19 2025 / 06:50:35 (024f8e13d) MSP API: 1.46
+# config rev: 7db4179
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name SOLOGOODF722
+manufacturer_id SLGD
+mcu_id 003600393433510937313337
+signature 
+
+# name: Peklo Toy
+
+# resources
+resource MOTOR 5 NONE
+resource MOTOR 8 NONE
+resource SERVO 1 B00
+resource SERVO 2 B04
+
+# feature
+feature -AIRMODE
+feature SERVO_TILT
+feature OSD
+
+# serial
+serial 3 8192 115200 57600 0 115200
+
+# servo
+servo 0 1000 2500 1500 100 8
+servo 1 1000 2000 1500 100 9
+
+# aux
+aux 0 0 0 1700 2100 0 0
+aux 1 1 2 1725 2100 0 0
+aux 2 2 2 1300 1700 0 0
+aux 3 28 3 1300 2100 0 0
+
+# rxrange
+rxrange 0 989 2012
+rxrange 1 989 2012
+rxrange 2 989 2012
+rxrange 3 989 2012
+
+# vtxtable
+vtxtable bands 2
+vtxtable channels 8
+vtxtable band 1 BAND-A   A CUSTOM  3330 3350 3370 3390 3410 3430 3450 3470
+vtxtable band 2 BAND-B   B CUSTOM  3170 3190 3210 3230 3250 3270 3290 3310
+vtxtable powerlevels 3
+vtxtable powervalues 25 200 4000
+vtxtable powerlabels 25 200 4
+
+# vtx
+vtx 0 1 0 0 1 900 1200
+vtx 1 1 0 0 2 1200 1800
+vtx 2 1 0 0 3 1800 2100
+
+# rxfail
+rxfail 3 h
+rxfail 8 s 2000
+rxfail 9 s 1000
+
+# master
+set gyro_lpf1_static_hz = 125
+set gyro_lpf2_static_hz = 250
+set dyn_notch_count = 5
+set dyn_notch_min_hz = 60
+set dyn_notch_max_hz = 300
+set gyro_lpf1_dyn_min_hz = 125
+set gyro_lpf1_dyn_max_hz = 250
+set acc_calibration = 106,21,0,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set vbat_min_cell_voltage = 300
+set vbat_warning_cell_voltage = 330
+set ibata_scale = 80
+set ibata_offset = -1120
+set small_angle = 180
+set pid_process_denom = 2
+set simplified_gyro_filter = OFF
+set simplified_gyro_filter_multiplier = 50
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2391
+set osd_link_quality_pos = 2455
+set osd_rssi_dbm_pos = 2423
+set osd_tim_2_pos = 2455
+set osd_flymode_pos = 2074
+set osd_throttle_pos = 2432
+set osd_vtx_channel_pos = 18521
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2442
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2111278
+set osd_displayport_device = AUTO
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 1
+set vtx_low_power_disarm = ON
+set vtx_freq = 3390
+set vcd_video_system = AUTO
+set rpm_filter_min_hz = 55
+set craft_name = Peklo Toy
+
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set dterm_lpf1_dyn_min_hz = 60
+set dterm_lpf1_dyn_max_hz = 120
+set dterm_lpf1_static_hz = 60
+set dterm_lpf2_static_hz = 120
+set p_pitch = 52
+set i_pitch = 50
+set d_pitch = 30
+set f_pitch = 30
+set p_roll = 50
+set i_roll = 50
+set d_roll = 30
+set f_roll = 30
+set f_yaw = 30
+set d_min_roll = 15
+set d_min_pitch = 30
+set simplified_pids_mode = OFF
+set simplified_dterm_filter_multiplier = 80
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 52
+set i_pitch = 50
+set d_pitch = 30
+set f_pitch = 30
+set p_roll = 50
+set i_roll = 50
+set d_roll = 30
+set f_roll = 30
+set f_yaw = 30
+set d_min_roll = 15
+set d_min_pitch = 15
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration

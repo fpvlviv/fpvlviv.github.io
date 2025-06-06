@@ -1,3 +1,37 @@
+# master pid
+
+set acc_calibration = -44,-41,50,1
+set acc_trim_roll = 1
+set bat_capacity = 8400
+set blackbox_device = NONE
+set blackbox_sample_rate = 1/8
+set craft_name = Peklo Toy
+set dshot_bidir = ON
+set dyn_notch_count = 2
+set dyn_notch_max_hz = 400
+set dyn_notch_min_hz = 70
+set dyn_notch_q = 500
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set gyro_lpf1_dyn_max_hz = 400
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set ibata_scale = 100
+set motor_pwm_protocol = DSHOT300
+set pid_process_denom = 2
+set rpm_filter_min_hz = 80
+set simplified_gyro_filter_multiplier = 80
+set small_angle = 180
+set vbat_min_cell_voltage = 300
+set vbat_warning_cell_voltage = 330
+set vcd_video_system = AUTO
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_freq = 5805
+set vtx_low_power_disarm = ON
+set vtx_power = 2
+
 
 profile 0
 

@@ -4,7 +4,7 @@
 			"options": [
 				{"ids": ["SPEEDYBEEF405V4"], "name": "SpeedyBee F405 V4" },
 				{"ids": ["SPEEDYBEEF405V3"], "name": "SpeedyBee F405 V3" },				
-                {"ids": ["OMNIBUSF4SD"], "name": "YSIDO NEW F4 V3S PLUS" }				
+                {"ids": ["YSIDO_OMNIBUSF4SD"], "name": "YSIDO NEW F4 V3S PLUS" }				
 			],
 			"selectors": [
 				{
@@ -17,7 +17,6 @@
 			"options": [
 				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "BatS3214_730_GF_1070"]},
 				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "BatS3115_900_Hq_9_10"]},
-				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "BHAvenger2812_900_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "hp3115_640_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "R3115_900_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "xing2814_880_Hq_9_10"]},
@@ -30,8 +29,8 @@
 				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "BHAvenger2812_900_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "Emax2814_730_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "KN3214_730_GF_1070"]},
-				{"ids":["OMNIBUSF4SD", "carbon_10Mark4V2",     "BatS3115_900_Hq_9_10"]},
-				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "BatS3214_730_GF_1070"]},
+				{"ids":["YSIDO_OMNIBUSF4SD", "carbon_10Mark4V2",     "BatS3115_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "BatS3214_730_HQ_1070"]},
 				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",      "R3115_900_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",      "KN3214_730_GF_1070"]}
 			],
@@ -52,6 +51,7 @@
 				"BatS3110_800_Hq_9_10":"BatS3110 800KV, Hq9-10",				
 				"Emax2814_730_Hq_9_10":"Emax2814 730KV, Hq9-10",
 				"BatS3214_730_GF_1070":"BatS3214 730KV, 1070/1050",
+				"BatS3214_730_HQ_1070":"BatS3214 730KV, 1070/1050",
 				"KN3214_730_GF_1070":"KN3214 730KV, 1070/1050"
 			},
 			"selectors": [

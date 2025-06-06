@@ -1,0 +1,186 @@
+defaults nosave
+
+
+# version
+# Betaflight / STM32F405 (S405) 4.4.3 Jun 26 2024 / 08:35:03 (738127e7e) MSP API: 1.45
+
+# config: YES
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name SPEEDYBEEF405V3
+manufacturer_id SPBE
+mcu_id 004e001e3433510d30313835
+signature 
+
+# name: Bimber41
+
+# resources
+resource MOTOR 5 NONE
+resource SERVO 2 B00
+
+# feature
+feature -AIRMODE
+feature SERVO_TILT
+feature CHANNEL_FORWARDING
+
+# serial
+serial 0 2048 115200 57600 0 115200
+serial 1 0 115200 57600 0 115200
+serial 4 0 115200 57600 0 115200
+serial 5 64 115200 57600 0 115200
+
+# servo
+servo 0 1000 2000 1500 100 10
+servo 1 1000 2000 1500 100 7
+
+# aux
+aux 0 0 0 1700 2100 0 0
+aux 1 1 1 1600 2100 0 0
+aux 2 28 4 1300 2100 0 0
+
+# rxrange
+rxrange 0 989 2012
+rxrange 1 989 2012
+rxrange 2 989 2012
+rxrange 3 989 2012
+
+# vtxtable
+vtxtable bands 5
+vtxtable channels 8
+vtxtable band 1 BOSCAM_A A FACTORY 5865 5845 5825 5805 5785 5765 5745 5725
+vtxtable band 2 BOSCAM_B B FACTORY 5733 5752 5771 5790 5809 5828 5847 5866
+vtxtable band 3 BOSCAM_E E FACTORY 5705 5685 5665    0 5885 5905    0    0
+vtxtable band 4 FATSHARK F FACTORY 5740 5760 5780 5800 5820 5840 5860 5880
+vtxtable band 5 RACEBAND R FACTORY 5658 5695 5732 5769 5806 5843 5880 5917
+vtxtable powerlevels 5
+vtxtable powervalues 0 1 2 3 4
+vtxtable powerlabels 250 500 1W 2W 3W
+
+# vtx
+vtx 0 2 0 0 1 900 1100
+vtx 1 2 0 0 3 1400 1600
+vtx 2 2 0 0 4 1900 2100
+
+# rxfail
+rxfail 3 h
+
+# master
+set gyro_lpf1_static_hz = 200
+set gyro_lpf2_static_hz = 400
+set dyn_notch_count = 2
+set dyn_notch_q = 500
+set dyn_notch_min_hz = 70
+set dyn_notch_max_hz = 300
+set gyro_lpf1_dyn_min_hz = 200
+set gyro_lpf1_dyn_max_hz = 400
+set acc_calibration = -62,-1,10,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = NONE
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_delay = 200
+set failsafe_throttle_low_delay = 200
+set bat_capacity = 8400
+set small_angle = 180
+set simplified_gyro_filter_multiplier = 80
+set osd_cap_alarm = 6600
+set osd_vbat_pos = 2048
+set osd_rssi_pos = 2395
+set osd_link_quality_pos = 2424
+set osd_rssi_dbm_pos = 407
+set osd_tim_2_pos = 2456
+set osd_flymode_pos = 2074
+set osd_throttle_pos = 2400
+set osd_vtx_channel_pos = 2133
+set osd_crosshairs_pos = 2285
+set osd_ah_pos = 2158
+set osd_current_pos = 2112
+set osd_mah_drawn_pos = 2145
+set osd_craft_name_pos = 2412
+set osd_gps_speed_pos = 53
+set osd_gps_lon_pos = 17
+set osd_gps_lat_pos = 0
+set osd_gps_sats_pos = 58
+set osd_home_dir_pos = 46
+set osd_home_dist_pos = 47
+set osd_compass_bar_pos = 75
+set osd_altitude_pos = 2103
+set osd_pidrate_profile_pos = 346
+set osd_warnings_pos = 2186
+set osd_avg_cell_voltage_pos = 2080
+set osd_battery_usage_pos = 0
+set osd_disarmed_pos = 2251
+set osd_stat_bitmask = 2099182
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 3
+set vtx_low_power_disarm = ON
+set vtx_freq = 5805
+set rpm_filter_min_hz = 90
+set craft_name = Bimber41
+
+profile 0
+
+# profile 0
+set profile_name = 9prop
+set dterm_lpf1_dyn_min_hz = 60
+set dterm_lpf1_dyn_max_hz = 120
+set dterm_lpf1_static_hz = 60
+set dterm_lpf2_static_hz = 120
+set p_pitch = 40
+set i_pitch = 27
+set d_pitch = 22
+set f_pitch = 30
+set p_roll = 40
+set i_roll = 27
+set d_roll = 25
+set f_roll = 30
+set p_yaw = 51
+set f_yaw = 60
+set d_min_roll = 19
+set d_min_pitch = 18
+set simplified_pids_mode = OFF
+set simplified_dterm_filter_multiplier = 80
+
+profile 1
+
+# profile 1
+set profile_name = 10prop
+set p_pitch = 45
+set i_pitch = 19
+set d_pitch = 17
+set f_pitch = 30
+set i_roll = 19
+set d_roll = 17
+set f_roll = 30
+set f_yaw = 60
+set d_min_roll = 12
+set d_min_pitch = 12
+set simplified_pids_mode = OFF
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 1
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
