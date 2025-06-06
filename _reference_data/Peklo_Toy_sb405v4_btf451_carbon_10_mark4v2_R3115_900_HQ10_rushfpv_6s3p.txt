@@ -137,7 +137,7 @@ set craft_name = Peklo Toy
 profile 0
 
 # profile 0
-set profile_name = 10prop
+set profile_name = 1070
 set f_pitch = 60
 set f_roll = 60
 set f_yaw = 60

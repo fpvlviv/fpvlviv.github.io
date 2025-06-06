@@ -129,7 +129,7 @@ set craft_name = Peklo Toy
 profile 0
 
 # profile 0
-set profile_name = 10prop
+set profile_name = 1070
 set dterm_lpf1_dyn_min_hz = 67
 set dterm_lpf1_dyn_max_hz = 135
 set dterm_lpf1_static_hz = 67

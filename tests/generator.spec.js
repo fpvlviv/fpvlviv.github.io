@@ -78,10 +78,6 @@ test('Verify YSIDO_OMNIBUSF4SD_carbon_10Mark4V2_BatS3115_900_Hq_9_10.txt', async
   await verifyProfile(browser, 'YSIDO_OMNIBUSF4SD', 'carbon_10Mark4V2', 'BatS3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_ysido_btf451_carbon_10_mark4_bat3115_900_HQ10_akk_dominator_OMNIBUSF4SD.txt');
 });
 
-test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_R3115_900_Hq_9_10.txt', async ({ browser }) => {
-  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'R3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bdzhol_sb405v3_btf443_10frame_carbon_R3115_900_Hq_9_10_akk_ultimate.txt');
-});
-
 test('Verify SPEEDYBEEF405V3_carbon_8Mark4V2_BHAvenger2812_900_GF_8.txt', async ({ browser }) => {
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_8Mark4V2', 'BHAvenger2812_900_GF_8', 'akk_Ultra_25', 'Kraken', 'Gurkit_sb405v3_btf443_8frame_Avenger2812_900_gemfan8_akk_raice_ranger_LXband_2servo.txt');
 });
@@ -94,10 +90,6 @@ test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_BatS3214_730_GF_1070.txt', async (
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'BatS3214_730_GF_1070', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_bat3214_730_HQ10_rushfpv33_6s3p.txt');
 });
 
-test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_BHAvenger2812_900_Hq_9_10.txt', async ({ browser }) => {
-  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'BatS3214_730_GF_1070', 'akk_Ultra_25', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_bat3214_730_HQ10_rushfpv33_6s3p.txt');
-});
-
 test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_hp3115_640_Hq_9_10.txt', async ({ browser }) => {
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'hp3115_640_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bimber41_sb405v3_btf443_10frame_carbon_3115_640_Hq10_akk_ultimate_2servo.txt');
 });
@@ -106,7 +98,56 @@ test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_KN3214_730_GF_1070.txt', async ({ 
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'KN3214_730_GF_1070', 'rushfpv_maxsolo', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_KN3214_730_gemfan_1070_maxrushsolo_6s3p.txt');
 });
 
-/*
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_R3115_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'R3115_900_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bdzhol_sb405v3_btf443_10frame_carbon_R3115_900_Hq_9_10_akk_ultimate.txt');
+});
+
+//
+
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_xing2814_880_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'xing2814_880_Hq_9_10', 'rushfpv_maxsolo', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_xing2814_880_dialprop_9046_rashsolo_6s3p.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_xing2814_1100_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'xing2814_1100_Hq_9_10', 'akk_dominator', 'Kraken', 'Bimber41_sb405v3_btf443_10frame_xing2814_1100_Hq9_10_akk_dominator_2servo.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_xing3110_900_GF_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'xing3110_900_GF_9_10', 'Foxeer_Reaper_Extreme_3W_72Ch', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_xing3110_900_gemfan_1050_foxeer_reapeter_extreme_6s3p.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_carbon_10Xframe_BatS3115_900_Hq_9.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Xframe', 'BatS3115_900_Hq_9', 'akk_Ultra_25', 'Kraken', 'Bdzhol_sb405v3_btf450_10_X_frame_carbon_bat3115_900_Hq_9_akk_ultimate_6s2p.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_fiberglass_10Mark4V2_BatS3110_800_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'fiberglass_10Mark4V2', 'BatS3110_800_Hq_9_10', 'akk_dominator', 'Kraken', 'La_Bdzhola_sb405v3_btf443_10frame_tekstolit_bat3110_800_Hq9_10_akk_dominator.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_fiberglass_10Mark4V2_BatS3115_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'fiberglass_10Mark4V2', 'BatS3115_900_Hq_9_10', 'akk_dominator', 'Kraken', 'La_Bdzhola_sb405v3_btf443_10frame_tekstolit_bat3115_900_Hq9_10_akk_dominator.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_fiberglass_10Mark4V2_BHAvenger2812_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'fiberglass_10Mark4V2', 'BHAvenger2812_900_Hq_9_10', 'akk_dominator', 'Kraken', 'La_Bdzhola_sb405v3_btf443_10frame_tekstolit_avenger2812_900_Hq9_10_akk_dominator.txt');
+});
+
+test('Verify SPEEDYBEEF405V3_fiberglass_10Mark4V2_Emax2814_730_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'fiberglass_10Mark4V2', 'Emax2814_730_Hq_9_10', 'akk_dominator', 'Kraken', 'La_Bdzhola_sb405v3_btf443_10frame_tekstolit_emax2814_730_Hq9_10_akk_dominator.txt');
+});
+
+test('Verify SPEEDYBEEF405V4_carbon_10Mark4V2_BatS3214_730_HQ_1070.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V4', 'carbon_10Mark4V2', 'BatS3214_730_HQ_1070', 'Foxeer_Reaper_Extreme_3W_72Ch', 'Kraken', 'Peklo_Toy_sb405v4_btf451_carbon_10_mark4v2_bat3214_730_HQ10_rushfpv33_6s3p.txt');
+});
+
+test('Verify SPEEDYBEEF405V4_carbon_10Mark4V2_KN3214_730_GF_1070.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V4', 'carbon_10Mark4V2', 'KN3214_730_GF_1070', 'rushfpv_3G3_4W', 'Kraken', 'Peklo_Toy_sb405v4_btf451_carbon_10_mark4v2_bat3214_730_HQ10_rushfpv33_6s3p.txt');
+});
+
+test('Verify SPEEDYBEEF405V4_carbon_10Mark4V2_R3115_900_HQ_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V4', 'carbon_10Mark4V2', 'R3115_900_Hq_9_10', 'rushfpv_3G3_4W', 'Kraken', 'Peklo_Toy_sb405v4_btf451_carbon_10_mark4v2_R3115_900_HQ10_rushfpv_6s3p.txt');
+});
+
 test('All permutations generate a non-empty file', async ({ browser }) => {
   const downloadsDir = path.resolve(__dirname, '../_test_downloads');
   await fs.mkdir(downloadsDir, { recursive: true });
@@ -186,4 +227,3 @@ test('All permutations generate a non-empty file', async ({ browser }) => {
     }
   }
 });
-*/
