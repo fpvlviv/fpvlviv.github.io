@@ -1,3 +1,5 @@
 test-results/
 _test_downloads/
 
+node_modules/
+
