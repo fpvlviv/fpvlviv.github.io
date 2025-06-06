@@ -102,6 +102,10 @@ test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_hp3115_640_Hq_9_10.txt', async ({ 
   await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'hp3115_640_Hq_9_10', 'akk_Ultra_25', 'Kraken', 'Bimber41_sb405v3_btf443_10frame_carbon_3115_640_Hq10_akk_ultimate_2servo.txt');
 });
 
+test('Verify SPEEDYBEEF405V3_carbon_10Mark4V2_KN3214_730_GF_1070.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SPEEDYBEEF405V3', 'carbon_10Mark4V2', 'KN3214_730_GF_1070', 'rushfpv_maxsolo', 'Kraken', 'Peklo_Toy_sb405v3_btf451_carbon_10_mark4v2_KN3214_730_gemfan_1070_maxrushsolo_6s3p.txt');
+});
+
 /*
 test('All permutations generate a non-empty file', async ({ browser }) => {
   const downloadsDir = path.resolve(__dirname, '../_test_downloads');
