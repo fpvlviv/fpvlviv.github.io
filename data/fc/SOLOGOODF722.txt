@@ -1,0 +1,8 @@
+board_name SOLOGOODF722
+manufacturer_id SLGD
+
+resource MOTOR 5 NONE
+resource MOTOR 8 NONE
+resource SERVO 1 B00
+resource SERVO 2 B04
+

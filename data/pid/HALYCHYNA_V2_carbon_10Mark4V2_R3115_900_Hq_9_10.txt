@@ -1,0 +1,80 @@
+# master pid
+set gyro_lpf1_static_hz = 75
+set gyro_lpf2_static_hz = 150
+set dyn_notch_count = 1
+set dyn_notch_q = 500
+set gyro_lpf1_dyn_min_hz = 75
+set gyro_lpf1_dyn_max_hz = 150
+set acc_calibration = 18,9,-5,1
+set dshot_idle_value = 1000
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_recovery_delay = 10
+set vbat_min_cell_voltage = 270
+set vbat_warning_cell_voltage = 300
+set small_angle = 180
+set pid_process_denom = 2
+set simplified_gyro_filter_multiplier = 30
+set sdcard_detect_inverted = ON
+set vtx_band = 1
+set vtx_channel = 4
+set vtx_power = 2
+set vtx_freq = 3390
+set vcd_video_system = AUTO
+set displayport_msp_fonts = 0,0,0,0
+set pinio_config = 1,1,1,1
+set pinio_box = 40,41,255,255
+set gyro_2_bustype = SPI
+set gyro_2_sensor_align = CW0
+set rpm_filter_min_hz = 70
+set craft_name = Peklo Toy
+
+profile 0
+
+# profile 0
+set dterm_lpf1_dyn_min_hz = 52
+set dterm_lpf1_dyn_max_hz = 105
+set dterm_lpf1_static_hz = 52
+set dterm_lpf2_static_hz = 105
+set yaw_lowpass_hz = 70
+set p_pitch = 35
+set i_pitch = 34
+set d_pitch = 20
+set f_pitch = 37
+set i_roll = 44
+set d_roll = 17
+set f_roll = 47
+set i_yaw = 44
+set f_yaw = 47
+set horizon_level_strength = 50
+set d_min_roll = 17
+set d_min_pitch = 20
+set dyn_idle_min_rpm = 50
+set simplified_i_gain = 55
+set simplified_d_gain = 60
+set simplified_dmax_gain = 0
+set simplified_feedforward_gain = 40
+set simplified_pitch_pi_gain = 75
+set simplified_dterm_filter_multiplier = 70
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration

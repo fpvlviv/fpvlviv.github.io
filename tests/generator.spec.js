@@ -148,6 +148,18 @@ test('Verify SPEEDYBEEF405V4_carbon_10Mark4V2_R3115_900_HQ_9_10.txt', async ({ b
   await verifyProfile(browser, 'SPEEDYBEEF405V4', 'carbon_10Mark4V2', 'R3115_900_Hq_9_10', 'rushfpv_3G3_4W', 'Kraken', 'Peklo_Toy_sb405v4_btf451_carbon_10_mark4v2_R3115_900_HQ10_rushfpv_6s3p.txt');
 });
 
+test('Verify HALYCHYNA_V2_carbon_10Mark4V2_R3115_900_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'HALYCHYNA_V2', 'carbon_10Mark4V2', 'R3115_900_Hq_9_10', 'rushfpv_3G3_4W', 'Kraken', 'Peklo_Toy_galichv2_btf451_carbon_10_mark4v2_R3115_900_HQ10_rushfpv_6s3p.txt');
+});
+
+test('Verify MAMBA_F405MK2_carbon_10Mark4V2_BatS3214_730_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'MAMBA_F405MK2', 'carbon_10Mark4V2', 'BatS3214_730_Hq_9_10', 'rushfpv_3G3_4W', 'Kraken', 'Peklo_Toy_mamba_btf451_carbon_10_mark4v2_R3214_730_HQ10_rushfpv_6s3p.txt');
+});
+
+test('Verify SOLOGOODF722_carbon_10Mark4V2_BatS3214_730_Hq_9_10.txt', async ({ browser }) => {
+  await verifyProfile(browser, 'SOLOGOODF722', 'carbon_10Mark4V2', 'BatS3214_730_Hq_9_10', 'rushfpv_3G3_4W', 'Kraken', 'Peklo_Toy_sologoodF722_btf452_carbon_10_mark4v2_R3214_730_HQ10_rushfpv_6s3p.txt');
+});
+
 test('All permutations generate a non-empty file', async ({ browser }) => {
   const downloadsDir = path.resolve(__dirname, '../_test_downloads');
   await fs.mkdir(downloadsDir, { recursive: true });

@@ -4,7 +4,10 @@
 			"options": [
 				{"ids": ["SPEEDYBEEF405V4"], "name": "SpeedyBee F405 V4" },
 				{"ids": ["SPEEDYBEEF405V3"], "name": "SpeedyBee F405 V3" },				
-                {"ids": ["YSIDO_OMNIBUSF4SD"], "name": "YSIDO NEW F4 V3S PLUS" }				
+                {"ids": ["YSIDO_OMNIBUSF4SD"], "name": "YSIDO NEW F4 V3S PLUS" },
+                {"ids": ["MAMBA_F405MK2"], "name": "Mamba F405 MK2 (FURYF4OSD)" },
+                {"ids": ["HALYCHYNA_V2"], "name": "Halychyna V2 (MODULE149V2)" },
+                {"ids": ["SOLOGOODF722"], "name": "Sologood F722" }
 			],
 			"selectors": [
 				{
@@ -29,10 +32,13 @@
 				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "BHAvenger2812_900_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "fiberglass_10Mark4V2", "Emax2814_730_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V3", "carbon_10Mark4V2",     "KN3214_730_GF_1070"]},
-				{"ids":["YSIDO_OMNIBUSF4SD", "carbon_10Mark4V2",     "BatS3115_900_Hq_9_10"]},
+				{"ids":["YSIDO_OMNIBUSF4SD", "carbon_10Mark4V2",   "BatS3115_900_Hq_9_10"]},
 				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "BatS3214_730_HQ_1070"]},
-				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",      "R3115_900_Hq_9_10"]},
-				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",      "KN3214_730_GF_1070"]}
+				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "R3115_900_Hq_9_10"]},
+				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "KN3214_730_GF_1070"]},
+				{"ids":["MAMBA_F405MK2", "carbon_10Mark4V2",       "BatS3214_730_Hq_9_10"]},
+				{"ids":["HALYCHYNA_V2", "carbon_10Mark4V2",        "R3115_900_Hq_9_10"]},
+				{"ids":["SOLOGOODF722", "carbon_10Mark4V2",        "BatS3214_730_Hq_9_10"]}
 			],
 			"optionnames": {
 				"carbon_10Mark4V2": "Carbon 10\" Mark4 v2",
@@ -52,6 +58,7 @@
 				"Emax2814_730_Hq_9_10":"Emax2814 730KV, Hq9-10",
 				"BatS3214_730_GF_1070":"BatS3214 730KV, 1070/1050",
 				"BatS3214_730_HQ_1070":"BatS3214 730KV, 1070/1050",
+				"BatS3214_730_Hq_9_10": "BatS3214 730KV, Hq9-10",
 				"KN3214_730_GF_1070":"KN3214 730KV, 1070/1050"
 			},
 			"selectors": [
