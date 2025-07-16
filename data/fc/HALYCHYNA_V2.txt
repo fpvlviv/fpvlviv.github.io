@@ -1,0 +1,2 @@
+board_name MODULE149V2
+manufacturer_id LVIV
