@@ -5,3 +5,4 @@ manufacturer_id SPBE
 resource MOTOR 5 NONE
 resource SERVO 1 B15
 resource SERVO 2 C08
+set serialrx_provider = CRSF
