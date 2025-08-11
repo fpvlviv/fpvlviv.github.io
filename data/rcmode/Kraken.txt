@@ -33,3 +33,4 @@ set osd_tim_2_pos = 2455
 set osd_vbat_pos = 2048
 set osd_vtx_channel_pos = 18521
 set osd_warnings_pos = 2186
+set serialrx_provider = CRSF
