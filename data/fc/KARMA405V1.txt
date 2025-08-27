@@ -1,0 +1,2 @@
+board_name KARMA405V1
+manufacturer_id KRMA

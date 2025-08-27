@@ -7,7 +7,8 @@
                 {"ids": ["YSIDO_OMNIBUSF4SD"], "name": "YSIDO NEW F4 V3S PLUS" },
                 {"ids": ["MAMBA_F405MK2"], "name": "Mamba F405 MK2 (FURYF4OSD)" },
                 {"ids": ["HALYCHYNA_V2"], "name": "Halychyna V2 (MODULE149V2)" },
-                {"ids": ["SOLOGOODF722"], "name": "Sologood F722" }
+                {"ids": ["SOLOGOODF722"], "name": "Sologood F722" },
+                {"ids": ["KARMA405V1"], "name": "Karma 405 v1" }
 			],
 			"selectors": [
 				{
@@ -38,7 +39,8 @@
 				{"ids":["SPEEDYBEEF405V4", "carbon_10Mark4V2",     "KN3214_730_GF_1070"]},
 				{"ids":["MAMBA_F405MK2", "carbon_10Mark4V2",       "BatS3214_730_Hq_9_10"]},
 				{"ids":["HALYCHYNA_V2", "carbon_10Mark4V2",        "R3115_900_Hq_9_10"]},
-				{"ids":["SOLOGOODF722", "carbon_10Mark4V2",        "BatS3214_730_Hq_9_10"]}
+				{"ids":["SOLOGOODF722", "carbon_10Mark4V2",        "BatS3214_730_Hq_9_10"]},
+				{"ids":["KARMA405V1", "carbon_10Mark4V2",          "BatS3214_730_Hq_9_10"]}
 			],
 			"optionnames": {
 				"carbon_10Mark4V2": "Carbon 10\" Mark4 v2",
